@@ -30,20 +30,20 @@ const Header = () => {
           </div>
         ) : (
           <>
-          <Link to='/signup' >
-          <button className="bg-transparent border-inherit py-1 px-5 text-white  font-semibold text-xs cursor-pointer rounded border-2 border-transparent hover:border-yellow hover:bg-transparent hover:text-yellow duration-200">
-            Sign up
-          </button>
-          </Link>
-          <Link to='/signin' className="px-4" >
-          <button className="bg-yellow py-1 px-5 text-white  font-semibold text-xs cursor-pointer rounded border-2 border-transparent hover:border-yellow hover:bg-transparent hover:text-yellow duration-200">
-            Sign in
-          </button>
-          </Link>
+            <Link to="/signup">
+              <button className="bg-transparent border-inherit py-1 px-5 text-white  font-semibold text-xs cursor-pointer rounded border-2 border-transparent hover:border-yellow hover:bg-transparent hover:text-yellow duration-200">
+                Sign up
+              </button>
+            </Link>
+            <Link to="/signin" className="px-4">
+              <button className="bg-yellow py-1 px-5 text-white  font-semibold text-xs cursor-pointer rounded border-2 border-transparent hover:border-yellow hover:bg-transparent hover:text-yellow duration-200">
+                Sign in
+              </button>
+            </Link>
           </>
         )}
       </div>
-    </div>  
+    </div>
   )
 }
 
