@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom"
 import { Header, SignIn, SignUp } from "./components"
 
 // pages
-import Home from "./pages/Home";
+import Home from "./pages/Home"
 import Room from "./pages/Room"
 import NotFound from "./pages/NotFound"
 
