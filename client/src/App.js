@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom"
 import { Header } from "./components"
 
 // pages
-import Home from "./pages/Home";
+import Home from "./pages/Home"
 import Room from "./pages/Room"
 import NotFound from "./pages/NotFound"
 
@@ -17,7 +17,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/" element={<Room />} />
+          <Route path="/room/:roomID" element={<Room />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

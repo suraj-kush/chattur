@@ -89,7 +89,6 @@ const Room = () => {
         signal,
         user: user
           ? {
-              //user from firebase
               uid: user?.uid,
               email: user?.email,
               name: user?.displayName,
@@ -117,24 +116,24 @@ const Room = () => {
     return peer
   }
 
-  // video stream
   useEffect(() => {
-    const video = () => {
+    const unsub = () => {
       socket.current = io.connect(
-        process.env.REACT_APP_BACKEsND_URL || "http://localhost:500"
+        process.env.REACT_BACKEND_URL || "http://localhost:5000"
       )
       socket.current.on("message", (data) => {
-        const msgAudio = new Audio(msgSoundSrc)
+        const audio = new Audio(msgSoundSrc)
         if (user?.uid !== data.user.id) {
           console.log("send")
-          msgAudio.play()
+          audio.play()
         }
         const msg = {
           send: user?.uid === data.user.id,
           ...data
         }
-        setMsgs([...msgs, msg])
-        console.log(msgs)
+        setMsgs((msgs) => [...msgs, msg])
+        // setMsgs(data);
+        // console.log(data);
       })
       if (user) {
         navigator.mediaDevices
@@ -178,12 +177,18 @@ const Room = () => {
             socket.current.on("user joined", (payload) => {
               // console.log(payload);
               const peer = addPeer(payload.signal, payload.callerID, stream)
+              peersRef.current.push({
+                peerID: payload.callerID,
+                peer,
+                user: payload.user
+              })
+
               const peerObj = {
                 peerID: payload.callerID,
                 peer,
                 user: payload.user
               }
-              peersRef.current.push(peerObj)
+
               setPeers((users) => [...users, peerObj])
             })
 
@@ -204,8 +209,8 @@ const Room = () => {
           })
       }
     }
-    return video()
-  }, [peers, roomID])
+    return unsub()
+  }, [user, roomID])
 
   return (
     <>
@@ -276,7 +281,8 @@ const Room = () => {
                           </div>
                         )}
 
-                        <div className="absolute bottom-4 right-4"></div>
+                        <div className="absolute bottom-4 right-4">
+                        </div>
                         <div className="absolute bottom-4 left-4">
                           <div className="bg-slate-800/70 backdrop-blur border-gray border-2  py-1 px-3 cursor-pointer rounded-md text-white text-xs">
                             {user?.displayName}
