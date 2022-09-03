@@ -3,19 +3,13 @@ import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-  // apiKey: process.env.API_KEY,
-  // authDomain: process.env.AUTH_DOMAIN,
-  // projectId: process.env.PROJECT_ID,
-  // storageBucket: process.env.STORAGE_BUCKET,
-  // messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  // appId: process.env.APP_ID
-  apiKey: "AIzaSyDswk1FvB2pCZeAEE7XAZDJ5Rvk7GHz6qM",
-  authDomain: "video-call-c40b5.firebaseapp.com",
-  projectId: "video-call-c40b5",
-  storageBucket: "video-call-c40b5.appspot.com",
-  messagingSenderId: "162995448850",
-  appId: "1:162995448850:web:4f6e8795dba4726b92bccb",
-  measurementId: "G-CZTFCB25G3"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_CLIENT_ID,
+  databaseURL: process.env.REACT_APP_DATABASE_URL
 }
 
 const app = initializeApp(firebaseConfig)
