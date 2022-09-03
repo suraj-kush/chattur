@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react"
-import { useRef } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { Prompt } from 'react-router'
 import { motion, AnimatePresence } from "framer-motion"
 import { io } from "socket.io-client"
 import Peer from "simple-peer"
@@ -474,7 +474,7 @@ const Room = () => {
                 <div className="w-full h-16 bg-darkBlue1 border-t-2 border-lightGray p-3">
                   <div className="flex items-center justify-center">
                     <div className="flex gap-4">
-                      <div>
+                      <motion.div whileTap={{ scale: 0.9 }}>
                         <button
                           className={`${
                             micOn
@@ -496,8 +496,8 @@ const Room = () => {
                         >
                           {micOn ? <MicOnIcon /> : <MicOffIcon />}
                         </button>
-                      </div>
-                      <div>
+                      </motion.div>
+                      <motion.div whileTap={{ scale: 0.9 }}>
                         <button
                           className={`${
                             videoActive
@@ -518,7 +518,7 @@ const Room = () => {
                         >
                           {videoActive ? <VideoOnIcon /> : <VideoOffIcon />}
                         </button>
-                      </div>
+                      </motion.div>
                     </div>
                     <div className="w-1/6 flex justify-center">
                       <button
@@ -535,10 +535,10 @@ const Room = () => {
                       </button>
                     </div>
                     <div className="flex gap-4">
-                      <div>
+                      <motion.div whileTap={{ scale: 0.9 }}>
                         <button
                           className={`bg-slate-800/70 backdrop-blur border-gray
-          border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
+          border-2  p-2 cursor-pointer rounded-xl text-white text-xl hover:bg-green-400`}
                           onClick={() =>
                             navigator.clipboard.writeText(window.location.href)
                           }
@@ -548,8 +548,8 @@ const Room = () => {
                             size={22}
                           />
                         </button>
-                      </div>
-                      <div>
+                      </motion.div>
+                      <motion.div whileTap={{ scale: 0.9 }}>
                         <button
                           className={`${
                             showChat
@@ -562,7 +562,7 @@ const Room = () => {
                         >
                           <ChatIcon />
                         </button>
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
