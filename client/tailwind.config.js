@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       border: {
-        1: "1px",
+        1: "1px"
       },
       colors: {
         darkBlue1: "#1c1f2e",
@@ -13,9 +13,9 @@ module.exports = {
         blue: "#0d78f8",
         yellow: "#ff742f",
         lightYellow: "#ff884c",
-        red: "#dd3d3d",
-      },
-    },
+        red: "#dd3d3d"
+      }
+    }
   },
-  plugins: [],
-};
+  plugins: []
+}

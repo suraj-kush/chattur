@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const HomeCard = ({ icon, title, desc, bgColor, route }) => {
   return (
@@ -23,7 +23,7 @@ const HomeCard = ({ icon, title, desc, bgColor, route }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeCard;
+export default HomeCard

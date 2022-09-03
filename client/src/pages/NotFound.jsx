@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom"
 
 const NotFound = () => {
   return (
@@ -46,7 +46,7 @@ const NotFound = () => {
         </main>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default NotFound;
+export default NotFound

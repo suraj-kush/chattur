@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app"
+import { getAuth } from "firebase/auth"
+import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -12,9 +12,10 @@ const firebaseConfig = {
     databaseURL: "https://chattur-2c770-default-rtdb.firebaseio.com/"
 };
 
-const app = initializeApp(firebaseConfig);
 
-const firestore = getFirestore(app);
-const auth = getAuth(app);
+const app = initializeApp(firebaseConfig)
 
-export { auth, firestore };
+const firestore = getFirestore(app)
+const auth = getAuth(app)
+
+export { auth, firestore }

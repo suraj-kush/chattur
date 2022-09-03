@@ -1,12 +1,12 @@
-const express = require('express')
-const http = require('http')
-const cors = require('cors')
+const express = require("express")
+const http = require("http")
+const cors = require("cors")
 const app = express()
 const server = http.createServer(app)
-const io = require('socket.io')(server, {
+const io = require("socket.io")(server, {
   cors: {
-    origin: process.env.ORIGIN || '*',
-  },
+    origin: process.env.ORIGIN || "*"
+  }
 })
 
 const PORT = process.env.PORT || 5000
@@ -14,8 +14,8 @@ const PORT = process.env.PORT || 5000
 const users = {}
 const socketToRoom = {}
 
-io.on('connection', (socket) => {
-  socket.on('join room', ({ roomID, user }) => {
+io.on("connection", (socket) => {
+  socket.on("join room", ({ roomID, user }) => {
     if (users[roomID]) {
       users[roomID].push({ userId: socket.id, user })
     } else {
@@ -25,40 +25,40 @@ io.on('connection', (socket) => {
     const usersInThisRoom = users[roomID].filter(
       (user) => user.userId !== socket.id
     )
-    socket.emit('all users', usersInThisRoom)
+    socket.emit("all users", usersInThisRoom)
   })
 
   // signal for offer
-  socket.on('sending signal', (payload) => {
-    io.to(payload.userToSignal).emit('user joined', {
+  socket.on("sending signal", (payload) => {
+    io.to(payload.userToSignal).emit("user joined", {
       signal: payload.signal,
       callerID: payload.callerID,
-      user: payload.user,
+      user: payload.user
     })
   })
 
   // signal for answer
-  socket.on('returning signal', (payload) => {
-    io.to(payload.callerID).emit('receiving returned signal', {
+  socket.on("returning signal", (payload) => {
+    io.to(payload.callerID).emit("receiving returned signal", {
       signal: payload.signal,
-      id: socket.id,
+      id: socket.id
     })
   })
 
   // send message
-  socket.on('send message', (payload) => {
-    io.emit('message', payload)
+  socket.on("send message", (payload) => {
+    io.emit("message", payload)
   })
 
   // disconnect
-  socket.on('disconnect', () => {
+  socket.on("disconnect", () => {
     const roomID = socketToRoom[socket.id]
     let room = users[roomID]
     if (room) {
       room = room.filter((item) => item.userId !== socket.id)
       users[roomID] = room
     }
-    socket.broadcast.emit('user left', socket.id)
+    socket.broadcast.emit("user left", socket.id)
   })
 })
 
