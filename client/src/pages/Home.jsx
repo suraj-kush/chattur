@@ -47,7 +47,8 @@ const Home = () => {
   }, [])
 
   function showPrompt(){
-    let roomLink = prompt("Please enter Link:");
+    let roomLink = prompt("Please enter Link:")
+    console.log("wow")
     if(roomLink==null || roomLink===""){
       console.log("enter link")
     } else {
@@ -90,12 +91,14 @@ const Home = () => {
                 route={`/room/`}
               />
             </Link>
+            <button onClick={showPrompt}>
             <HomeCard
               title="Join Meeting"
               desc="via invitation link"
-              icon={<JoinCallIcon onClick={showPrompt} />}
+              icon={<JoinCallIcon />}
               bgColor="bg-blue"
             />
+            </button>
           </div>
         </div>
       </div>
