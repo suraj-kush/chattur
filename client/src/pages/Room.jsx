@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { io } from 'socket.io-client'
-import Peer from 'simple-peer'
+import React, { useEffect, useState } from "react"
+import { useRef } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { motion, AnimatePresence } from "framer-motion"
+import { io } from "socket.io-client"
+import Peer from "simple-peer"
 
-import Loading from '../components/Loading'
-import { useAuth } from '../middleware/authentication'
-import MeetGridCard from '../components/MeetGridCard'
+import Loading from "../components/Loading"
+import { useAuth } from "../middleware/authentication"
+import MeetGridCard from "../components/MeetGridCard"
 
 //sounds
-import joinSoundSrc from '../sounds/join.mp3'
-import msgSoundSrc from '../sounds/message.mp3'
+import joinSoundSrc from "../sounds/join.mp3"
+import msgSoundSrc from "../sounds/message.mp3"
+import leaveSoundSrc from "../sounds/leave.mp3"
 
 const Room = () => {
   const [loading, setLoading] = useState(true)
@@ -24,7 +25,7 @@ const Room = () => {
   const [msgs, setMsgs] = useState([])
   const [particpentsOpen, setParticpentsOpen] = useState(true)
   const [videoActive, setVideoActive] = useState(true)
-  const [msgText, setMsgText] = useState('')
+  const [msgText, setMsgText] = useState("")
   const { roomID } = useParams()
   const navigate = useNavigate()
   const chatScroll = useRef()
@@ -39,28 +40,28 @@ const Room = () => {
   const sendMessage = (e) => {
     e.preventDefault()
     if (msgText) {
-      socket.current.emit('send message', {
+      socket.current.emit("send message", {
         roomID,
         from: socket.current.id,
         user: {
           id: user.uid,
           name: user?.displayName,
-          profilePic: user.photoURL,
+          profilePic: user.photoURL
         },
-        message: msgText.trim(),
+        message: msgText.trim()
       })
     }
-    setMsgText('')
+    setMsgText("")
   }
   const createPeer = (userToSignal, callerID, stream) => {
     const peer = new Peer({
       initiator: true,
       trickle: false,
-      stream,
+      stream
     })
 
-    peer.on('signal', (signal) => {
-      socket.current.emit('sending signal', {
+    peer.on("signal", (signal) => {
+      socket.current.emit("sending signal", {
         userToSignal,
         callerID,
         signal,
@@ -70,9 +71,9 @@ const Room = () => {
               uid: user?.uid,
               email: user?.email,
               name: user?.displayName,
-              photoURL: user?.photoURL,
+              photoURL: user?.photoURL
             }
-          : null,
+          : null
       })
     })
 
@@ -83,10 +84,10 @@ const Room = () => {
     const peer = new Peer({
       initiator: false,
       trickle: false,
-      stream,
+      stream
     })
-    peer.on('signal', (signal) => {
-      socket.current.emit('returning signal', { signal, callerID })
+    peer.on("signal", (signal) => {
+      socket.current.emit("returning signal", { signal, callerID })
     })
     const joinSound = new Audio(joinSoundSrc)
     joinSound.play()
@@ -98,17 +99,17 @@ const Room = () => {
   useEffect(() => {
     const video = () => {
       socket.current = io.connect(
-        process.env.BACKENDURL || 'http://localhost:5000'
+        process.env.BACKENDURL || "http://localhost:5000"
       )
-      socket.current.on('message', (data) => {
+      socket.current.on("message", (data) => {
         const msgAudio = new Audio(msgSoundSrc)
         if (user?.uid !== data.user.id) {
-          console.log('send')
+          console.log("send")
           msgAudio.play()
         }
         const msg = {
           send: user?.uid === data.user.id,
-          ...data,
+          ...data
         }
         setMsgs([...msgs, msg])
         console.log(msgs)
@@ -117,66 +118,66 @@ const Room = () => {
         navigator.mediaDevices
           .getUserMedia({
             video: true,
-            audio: true,
+            audio: true
           })
           .then((stream) => {
             setLoading(false)
             setLocalStream(stream)
             localVideo.current.srcObject = stream
-            socket.current.emit('join room', {
+            socket.current.emit("join room", {
               roomID,
               user: user
                 ? {
                     uid: user?.uid,
                     email: user?.email,
                     name: user?.displayName,
-                    photoURL: user?.photoURL,
+                    photoURL: user?.photoURL
                   }
-                : null,
+                : null
             })
-            socket.current.on('all users', (users) => {
+            socket.current.on("all users", (users) => {
               const peers = []
               users.forEach((user) => {
                 const peer = createPeer(user.userId, socket.current.id, stream)
                 peersRef.current.push({
                   peerID: user.userId,
                   peer,
-                  user: user.user,
+                  user: user.user
                 })
                 peers.push({
                   peerID: user.userId,
                   peer,
-                  user: user.user,
+                  user: user.user
                 })
               })
               setPeers(peers)
             })
 
-            socket.current.on('user joined', (payload) => {
+            socket.current.on("user joined", (payload) => {
               // console.log(payload);
               const peer = addPeer(payload.signal, payload.callerID, stream)
               peersRef.current.push({
                 peerID: payload.callerID,
                 peer,
-                user: payload.user,
+                user: payload.user
               })
 
               const peerObj = {
                 peerID: payload.callerID,
                 peer,
-                user: payload.user,
+                user: payload.user
               }
 
               setPeers((users) => [...users, peerObj])
             })
 
-            socket.current.on('receiving returned signal', (payload) => {
+            socket.current.on("receiving returned signal", (payload) => {
               const item = peersRef.current.find((p) => p.peerID === payload.id)
               item.peer.signal(payload.signal)
             })
 
-            socket.current.on('user left', (id) => {
-              const audio = new Audio(leaveSFX)
+            socket.current.on("user left", (id) => {
+              const audio = new Audio(leaveSoundSrc)
               audio.play()
               const peerObj = peersRef.current.find((p) => p.peerID === id)
               if (peerObj) peerObj.peer.destroy()
@@ -188,7 +189,7 @@ const Room = () => {
       }
     }
     return video()
-  }, [roomID])
+  }, [peer, roomID])
 
   return (
     <>
@@ -202,36 +203,42 @@ const Room = () => {
             user && (
               <motion.div
                 layout
-                className="flex flex-row bg-darkBlue2 text-white w-full">
+                className="flex flex-row bg-darkBlue2 text-white w-full"
+              >
                 <motion.div
                   layout
-                  className="flex flex-col bg-darkBlue2 justify-between w-full">
+                  className="flex flex-col bg-darkBlue2 justify-between w-full"
+                >
                   <div
                     className="flex-shrink-0 overflow-y-scroll p-3"
                     style={{
-                      height: 'calc(100vh - 128px)',
-                    }}>
+                      height: "calc(100vh - 128px)"
+                    }}
+                  >
                     <motion.div
                       layout
                       className={`grid grid-cols-1 gap-4  ${
                         showChat
-                          ? 'md:grid-cols-2'
-                          : 'lg:grid-cols-3 sm:grid-cols-2'
-                      } `}>
+                          ? "md:grid-cols-2"
+                          : "lg:grid-cols-3 sm:grid-cols-2"
+                      } `}
+                    >
                       <motion.div
                         layout
                         className={`relative bg-lightGray rounded-lg aspect-video overflow-hidden ${
                           pin &&
-                          'md:col-span-2 md:row-span-2 md:col-start-1 md:row-start-1'
-                        }`}>
+                          "md:col-span-2 md:row-span-2 md:col-start-1 md:row-start-1"
+                        }`}
+                      >
                         <div className="absolute top-4 right-4 z-20">
                           <button
                             className={`${
                               pin
-                                ? 'bg-blue border-transparent'
-                                : 'bg-slate-800/70 backdrop-blur border-gray'
+                                ? "bg-blue border-transparent"
+                                : "bg-slate-800/70 backdrop-blur border-gray"
                             } md:border-2 border-[1px] aspect-square md:p-2.5 p-1.5 cursor-pointer md:rounded-xl rounded-lg text-white md:text-xl text-lg`}
-                            onClick={() => setPin(!pin)}>
+                            onClick={() => setPin(!pin)}
+                          >
                             {pin ? <PinActiveIcon /> : <PinIcon />}
                           </button>
                         </div>
@@ -277,8 +284,8 @@ const Room = () => {
                           <button
                             className={`${
                               micOn
-                                ? 'bg-blue border-transparent'
-                                : 'bg-slate-800/70 backdrop-blur border-gray'
+                                ? "bg-blue border-transparent"
+                                : "bg-slate-800/70 backdrop-blur border-gray"
                             } border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
                             onClick={() => {
                               const audio =
@@ -291,7 +298,8 @@ const Room = () => {
                                 audio.enabled = true
                                 setMicOn(true)
                               }
-                            }}>
+                            }}
+                          >
                             {micOn ? <MicOnIcon /> : <MicOffIcon />}
                           </button>
                         </div>
@@ -299,20 +307,21 @@ const Room = () => {
                           <button
                             className={`${
                               videoActive
-                                ? 'bg-blue border-transparent'
-                                : 'bg-slate-800/70 backdrop-blur border-gray'
+                                ? "bg-blue border-transparent"
+                                : "bg-slate-800/70 backdrop-blur border-gray"
                             } border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
                             onClick={() => {
                               const videoTrack = localStream
                                 .getTracks()
-                                .find((track) => track.kind === 'video')
+                                .find((track) => track.kind === "video")
                               if (videoActive) {
                                 videoTrack.enabled = false
                               } else {
                                 videoTrack.enabled = true
                               }
                               setVideoActive(!videoActive)
-                            }}>
+                            }}
+                          >
                             {videoActive ? <VideoOnIcon /> : <VideoOffIcon />}
                           </button>
                         </div>
@@ -321,9 +330,10 @@ const Room = () => {
                         <button
                           className="py-2 px-4 flex items-center gap-2 rounded-lg bg-red"
                           onClick={() => {
-                            navigate('/')
+                            navigate("/")
                             window.location.reload()
-                          }}>
+                          }}
+                        >
                           <CallEndIcon size={20} />
                           <span className="hidden sm:block text-xs">
                             End Call
@@ -335,7 +345,8 @@ const Room = () => {
                           <button
                             className={`bg-slate-800/70 backdrop-blur border-gray
           border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
-                            onClick={() => setShare(true)}>
+                            onClick={() => setShare(true)}
+                          >
                             <ShareIcon size={22} />
                           </button>
                         </div>
@@ -343,12 +354,13 @@ const Room = () => {
                           <button
                             className={`${
                               showChat
-                                ? 'bg-blue border-transparent'
-                                : 'bg-slate-800/70 backdrop-blur border-gray'
+                                ? "bg-blue border-transparent"
+                                : "bg-slate-800/70 backdrop-blur border-gray"
                             } border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
                             onClick={() => {
                               setshowChat(!showChat)
-                            }}>
+                            }}
+                          >
                             <ChatIcon />
                           </button>
                         </div>
@@ -359,32 +371,37 @@ const Room = () => {
                 {showChat && (
                   <motion.div
                     layout
-                    className="flex flex-col w-[30%] flex-shrink-0 border-l-2 border-lightGray">
+                    className="flex flex-col w-[30%] flex-shrink-0 border-l-2 border-lightGray"
+                  >
                     <div
                       className="flex-shrink-0 overflow-y-scroll"
                       style={{
-                        height: 'calc(100vh - 128px)',
-                      }}>
+                        height: "calc(100vh - 128px)"
+                      }}
+                    >
                       <div className="flex flex-col bg-darkBlue1 w-full border-b-2 border-gray">
                         <div
                           className="flex items-center w-full p-3 cursor-pointer"
-                          onClick={() => setParticpentsOpen(!particpentsOpen)}>
+                          onClick={() => setParticpentsOpen(!particpentsOpen)}
+                        >
                           <div className="text-xl text-slate-400">
                             <UsersIcon />
                           </div>
                           <div className="ml-2 text-sm font">Particpents</div>
                           <div
                             className={`${
-                              particpentsOpen && 'rotate-180'
-                            } transition-all  ml-auto text-lg`}>
+                              particpentsOpen && "rotate-180"
+                            } transition-all  ml-auto text-lg`}
+                          >
                             <DownIcon />
                           </div>
                         </div>
                         <motion.div
                           layout
                           className={`${
-                            particpentsOpen ? 'block' : 'hidden'
-                          } flex flex-col w-full mt-2 h-full max-h-[50vh] overflow-y-scroll gap-3 p-2 bg-blue-600`}>
+                            particpentsOpen ? "block" : "hidden"
+                          } flex flex-col w-full mt-2 h-full max-h-[50vh] overflow-y-scroll gap-3 p-2 bg-blue-600`}
+                        >
                           <AnimatePresence>
                             <motion.div
                               layout
@@ -393,17 +410,18 @@ const Room = () => {
                               transition={{ duration: 0.08 }}
                               exit={{ opacity: 0 }}
                               whileHover={{ scale: 1.05 }}
-                              className="p-2 flex bg-gray items-center transition-all hover:bg-slate-900 gap-2 rounded-lg">
+                              className="p-2 flex bg-gray items-center transition-all hover:bg-slate-900 gap-2 rounded-lg"
+                            >
                               <img
                                 src={
                                   user.photoURL ||
-                                  'https://parkridgevet.com.au/wp-content/uploads/2020/11/Profile-300x300.png'
+                                  "https://parkridgevet.com.au/wp-content/uploads/2020/11/Profile-300x300.png"
                                 }
-                                alt={user.displayName || 'Anonymous'}
+                                alt={user.displayName || "Anonymous"}
                                 className="block w-8 h-8 aspect-square rounded-full mr-2"
                               />
                               <span className="font-medium text-sm">
-                                {user.displayName || 'Anonymous'}
+                                {user.displayName || "Anonymous"}
                               </span>
                             </motion.div>
                             {peers.map((user) => (
@@ -415,17 +433,18 @@ const Room = () => {
                                 exit={{ opacity: 0 }}
                                 key={user.peerID}
                                 whileHover={{ scale: 1.05 }}
-                                className="p-2 flex bg-gray items-center transition-all hover:bg-slate-900 gap-2 rounded-lg">
+                                className="p-2 flex bg-gray items-center transition-all hover:bg-slate-900 gap-2 rounded-lg"
+                              >
                                 <img
                                   src={
                                     user.user.photoURL ||
-                                    'https://parkridgevet.com.au/wp-content/uploads/2020/11/Profile-300x300.png'
+                                    "https://parkridgevet.com.au/wp-content/uploads/2020/11/Profile-300x300.png"
                                   }
-                                  alt={user.user.name || 'Anonymous'}
+                                  alt={user.user.name || "Anonymous"}
                                   className="block w-8 h-8 aspect-square rounded-full mr-2"
                                 />
                                 <span className="font-medium text-sm">
-                                  {user.user.name || 'Anonymous'}
+                                  {user.user.name || "Anonymous"}
                                 </span>
                               </motion.div>
                             ))}
@@ -440,16 +459,16 @@ const Room = () => {
                           <div className="ml-2 text-sm font">Chat</div>
                           <div
                             className="ml-auto text-lg"
-                            onClick={() =>
-                              setParticpentsOpen(!particpentsOpen)
-                            }>
+                            onClick={() => setParticpentsOpen(!particpentsOpen)}
+                          >
                             <DownIcon />
                           </div>
                         </div>
                         <motion.div
                           layout
                           ref={chatScroll}
-                          className="p-3 h-full overflow-y-scroll flex flex-col gap-4">
+                          className="p-3 h-full overflow-y-scroll flex flex-col gap-4"
+                        >
                           {msgs.map((msg, index) => (
                             <motion.div
                               layout
@@ -458,10 +477,11 @@ const Room = () => {
                               transition={{ duration: 0.08 }}
                               className={`flex gap-2 ${
                                 msg?.user.id === user?.uid
-                                  ? 'flex-row-reverse'
-                                  : ''
+                                  ? "flex-row-reverse"
+                                  : ""
                               }`}
-                              key={index}>
+                              key={index}
+                            >
                               <img
                                 // src="https://avatars.githubusercontent.com/u/83828231"
                                 src={msg?.user.profilePic}
@@ -490,8 +510,9 @@ const Room = () => {
                             {msgText && (
                               <button
                                 type="button"
-                                onClick={() => setMsgText('')}
-                                className="bg-transparent text-darkBlue2 absolute top-0 right-0 text-lg cursor-pointer p-2  h-full">
+                                onClick={() => setMsgText("")}
+                                className="bg-transparent text-darkBlue2 absolute top-0 right-0 text-lg cursor-pointer p-2  h-full"
+                              >
                                 <ClearIcon />
                               </button>
                             )}
@@ -545,7 +566,7 @@ const Room = () => {
                     value={window.location.href}
                     logoImage="/images/logo.png"
                     qrStyle="dots"
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                     eyeRadius={10}
                   />
                 </div>
@@ -557,7 +578,8 @@ const Room = () => {
         <div className="h-full bg-darkBlue2 flex items-center justify-center">
           <button
             className="flex items-center gap-2 p-1 pr-3 rounded text-white font-bold bg-blue transition-all"
-            onClick={login}>
+            onClick={login}
+          >
             <div className="p-2 bg-white rounded">
               <GoogleIcon size={24} />
             </div>
