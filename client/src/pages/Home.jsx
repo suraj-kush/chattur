@@ -48,6 +48,15 @@ const Home = () => {
     }
   }, [])
 
+  function showPrompt(){
+    let roomLink = prompt("Please enter Link:");
+    if(roomLink==null || roomLink===""){
+      console.log("enter link")
+    } else {
+      console.log(roomLink)
+    }
+  }
+
   return (
     <div className="bg-darkBlue1 min-h-screen text-slate-400 content-center ">
       <div className="flex flex-row justify-center md:border-l-2 border-lightGray p-3 md:p-4">
@@ -86,7 +95,7 @@ const Home = () => {
             <HomeCard
               title="Join Meeting"
               desc="via invitation link"
-              icon={<JoinCallIcon />}
+              icon={<JoinCallIcon onClick={showPrompt} />}
               bgColor="bg-blue"
             />
           </div>
