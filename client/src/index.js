@@ -10,7 +10,6 @@ ReactDOM.render(
     <Router>
       <App />
     </Router>
-    asd
   </AuthProvider>,
   document.getElementById("root")
 )

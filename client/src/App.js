@@ -7,7 +7,7 @@ import { Header } from "./components"
 
 // pages
 // import Home from "../page/Home";
-// import Room from "./pages/Room";
+import Room from "./pages/Room";
 import NotFound from "./pages/NotFound"
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
         <Header />
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
-          {/* <Route path="/room/:roomID" element={<Room />} /> */}
+          <Route path="/" element={<Room />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
