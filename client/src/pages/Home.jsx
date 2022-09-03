@@ -4,10 +4,8 @@ import HomeCard from "../components/HomeCard"
 import { v4 as uuid } from "uuid"
 
 // icons
-import { MdVideoCall as NewCallIcon } from "react-icons/md"
-import { MdAddBox as JoinCallIcon } from "react-icons/md"
-import { BsCalendarDate as CalenderIcon } from "react-icons/bs"
-import { MdScreenShare as ScreenShareIcon } from "react-icons/md"
+import { NewCallIcon, JoinCallIcon } from "../Icons";
+
 import { Link } from "react-router-dom"
 
 const roomId = uuid()

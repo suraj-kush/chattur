@@ -17,6 +17,8 @@ import { FiSend } from "react-icons/fi"
 import { FcGoogle } from "react-icons/fc"
 import {
   MdClear,
+  MdVideoCall,
+  MdAddBox,
   MdOutlineContentCopy,
   MdScreenShare,
   MdCallEnd
@@ -40,3 +42,5 @@ export const ShareIcon = () => <AiOutlineShareAlt />
 export const MicOnIcon = () => <IoMic />
 export const MicOffIcon = () => <IoMicOff />
 export const CallEndIcon = () => <MdCallEnd />
+export const NewCallIcon = () => <MdVideoCall />
+export const JoinCallIcon = () => <MdAddBox />
