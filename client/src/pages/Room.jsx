@@ -6,7 +6,7 @@ import { io } from "socket.io-client"
 import Peer from "simple-peer"
 
 import Loading from "../components/Loading"
-import { useAuth } from "../middleware/authentication"
+import { useAuth } from "../middleware/Authentication"
 import MeetGridCard from "../components/MeetGridCard"
 
 //sounds

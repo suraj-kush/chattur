@@ -13,8 +13,8 @@ import {
 const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const getUser = async () => {
       onAuthStateChanged(auth, async (user) => {
@@ -26,11 +26,11 @@ const AuthProvider = ({ children }) => {
           setUser(null)
           setLoading(false)
         }
-      });
-    };
-    return getUser();
-  }, []);
-// google login 
+      })
+    }
+    return getUser()
+  }, [])
+  // google login
   const loginGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider()
@@ -52,38 +52,38 @@ const AuthProvider = ({ children }) => {
       setUser(null)
       return error
     }
-  };
- // sign up with email and password 
-  const signUp = (email, password) => {
-   createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    console.log("signed Up")
-    return user;
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage)
-    return errorCode
-  });
   }
-// login with email and password
+  // sign up with email and password
+  const signUp = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user
+        console.log("signed Up")
+        return user
+      })
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorMessage)
+        return errorCode
+      })
+  }
+  // login with email and password
   const login = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    console.log("logged in")
-    return user;
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage)
-    return errorCode;
-  });
+      .then((userCredential) => {
+        const user = userCredential.user
+        console.log("logged in")
+        return user
+      })
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorMessage)
+        return errorCode
+      })
   }
-// logout from app
+  // logout from app
   const logout = async () => {
     console.log("Logout")
     signOut(auth)
