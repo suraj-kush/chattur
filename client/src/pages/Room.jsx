@@ -246,7 +246,7 @@ const Room = () => {
                         layout
                         className={`grid grid-cols-1 gap-4  ${
                           showChat
-                            ? "md:grid-cols-2"
+                            ? "md:grid-cols-2" 
                             : "lg:grid-cols-3 sm:grid-cols-2"
                         } `}
                       >
@@ -477,14 +477,14 @@ const Room = () => {
                   )}
                 </motion.div>
                 <div className="w-full h-16 bg-darkBlue1 border-t-2 border-lightGray p-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex gap-2">
+                  <div className="flex items-center justify-center">
+                    <div className="flex gap-4">
                       <div>
                         <button
                           className={`${
                             micOn
-                              ? "bg-blue border-transparent"
-                              : "bg-slate-800/70 backdrop-blur border-gray"
+                              ? "bg-slate-800/70 border-gray"
+                              : "bg-red backdrop-blur border-transparent"
                           } border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
                           onClick={() => {
                             const audio =
@@ -506,8 +506,8 @@ const Room = () => {
                         <button
                           className={`${
                             videoActive
-                              ? "bg-blue border-transparent"
-                              : "bg-slate-800/70 backdrop-blur border-gray"
+                              ? "bg-slate-800/70 border-gray"
+                              : "bg-red backdrop-blur border-transparent"
                           } border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
                           onClick={() => {
                             const videoTrack = localStream
@@ -525,7 +525,7 @@ const Room = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="flex-grow flex justify-center">
+                    <div className="w-1/6 flex justify-center">
                       <button
                         className="py-2 px-4 flex items-center gap-2 rounded-lg bg-red"
                         onClick={() => {
@@ -539,7 +539,7 @@ const Room = () => {
                         </span>
                       </button>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-4">
                       <div>
                         <button
                           className={`bg-slate-800/70 backdrop-blur border-gray
