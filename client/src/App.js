@@ -12,15 +12,13 @@ import NotFound from "./pages/NotFound"
 
 const App = () => {
   return (
-    <div className="flex">
-      <div className="max-h-screen overflow-auto w-full">
-        <Header />
-        <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<Room />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+    <div className="max-h-screen h-screen overflow-auto w-full">
+      <Header />
+      {/* <div className="h-screen bg-red">sd</div> */}
+      <Routes>
+        <Route path="/" element={<Room />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   )
 }
