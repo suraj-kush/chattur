@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react"
 import { useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
@@ -45,7 +46,8 @@ const Room = () => {
   const [pin, setPin] = useState(false)
   const [peers, setPeers] = useState([])
   const [msgs, setMsgs] = useState([])
-  const [particpentsOpen, setParticpentsOpen] = useState(true)
+  const [participantsOpen, setparticipantsOpen] = useState(true)
+  const [chatBoxOpen, setChatBoxOpen] = useState(true)
   const [videoActive, setVideoActive] = useState(true)
   const [msgText, setMsgText] = useState("")
   const { roomID } = useParams()
@@ -404,15 +406,15 @@ const Room = () => {
                       <div className="flex flex-col bg-darkBlue1 w-full border-b-2 border-gray">
                         <div
                           className="flex items-center w-full p-3 cursor-pointer"
-                          onClick={() => setParticpentsOpen(!particpentsOpen)}
+                          onClick={() => setparticipantsOpen(!participantsOpen)}
                         >
                           <div className="text-xl text-slate-400">
                             <UsersIcon />
                           </div>
-                          <div className="ml-2 text-sm font">Particpents</div>
+                          <div className="ml-2 text-sm font">Participants</div>
                           <div
                             className={`${
-                              particpentsOpen && "rotate-180"
+                              participantsOpen && "rotate-180"
                             } transition-all  ml-auto text-lg`}
                           >
                             <DownIcon />
@@ -421,7 +423,7 @@ const Room = () => {
                         <motion.div
                           layout
                           className={`${
-                            particpentsOpen ? "block" : "hidden"
+                            participantsOpen ? "block" : "hidden"
                           } flex flex-col w-full mt-2 h-full max-h-[50vh] overflow-y-scroll gap-3 p-2 bg-blue-600`}
                         >
                           <AnimatePresence>
@@ -481,7 +483,7 @@ const Room = () => {
                           <div className="ml-2 text-sm font">Chat</div>
                           <div
                             className="ml-auto text-lg"
-                            onClick={() => setParticpentsOpen(!particpentsOpen)}
+                            onClick={() => setChatBoxOpen(!chatBoxOpen)}
                           >
                             <DownIcon />
                           </div>
