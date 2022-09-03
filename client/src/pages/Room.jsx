@@ -418,10 +418,10 @@ const Room = () => {
                               <motion.div
                                 layout
                                 initial={{
-                                  x: msg.send ? 100 : -100,
+                                  y: msg.send ? 250 : 250,
                                   opacity: 0
                                 }}
-                                animate={{ x: 0, opacity: 1 }}
+                                animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.08 }}
                                 className={`flex gap-2 ${
                                   msg?.user.id === user?.uid
