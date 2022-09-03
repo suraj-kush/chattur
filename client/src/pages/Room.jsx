@@ -24,25 +24,20 @@ import {
   GoogleIcon,
   CallEndIcon,
   ClearIcon,
-  LinkIcon,
   CopyToClipboardIcon,
   VideoOnIcon,
   VideoOffIcon,
-  ShareIcon,
   MicOffIcon,
   MicOnIcon,
   PinIcon,
   PinActiveIcon
 } from "../Icons"
 
-import { QRCode } from "react-qrcode-logo"
-
 const Room = () => {
   const [loading, setLoading] = useState(true)
   const [localStream, setLocalStream] = useState(null)
   const [micOn, setMicOn] = useState(true)
   const [showChat, setshowChat] = useState(true)
-  const [share, setShare] = useState(false)
   const [pin, setPin] = useState(false)
   const [peers, setPeers] = useState([])
   const [msgs, setMsgs] = useState([])
@@ -246,7 +241,7 @@ const Room = () => {
                         layout
                         className={`grid grid-cols-1 gap-4  ${
                           showChat
-                            ? "md:grid-cols-2" 
+                            ? "md:grid-cols-2"
                             : "lg:grid-cols-3 sm:grid-cols-2"
                         } `}
                       >
@@ -544,9 +539,14 @@ const Room = () => {
                         <button
                           className={`bg-slate-800/70 backdrop-blur border-gray
           border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
-                          onClick={() => setShare(true)}
+                          onClick={() =>
+                            navigator.clipboard.writeText(window.location.href)
+                          }
                         >
-                          <ShareIcon size={22} />
+                          <CopyToClipboardIcon
+                            className="cursor-pointer"
+                            size={22}
+                          />
                         </button>
                       </div>
                       <div>
@@ -568,49 +568,6 @@ const Room = () => {
                 </div>
               </motion.div>
             )
-          )}
-          {share && (
-            <div className="fixed flex items-center justify-center top-0 left-0 h-full w-full z-30 bg-slate-800/60 backdrop-blur">
-              <div className="bg-white  p-3 rounded shadow shadow-white w-full mx-auto max-w-[500px] relative">
-                <div className="flex items-center justify-between">
-                  <div className="text-slate-800">
-                    Share the link with someone to join the room
-                  </div>
-                  <div>
-                    <ClearIcon
-                      size={30}
-                      color="#121212"
-                      onClick={() => setShare(false)}
-                    />
-                  </div>
-                </div>
-                <div className="my-5 rounded flex items-center justify-between gap-2 text-sm text-slate-500 bg-slate-200 p-2 ">
-                  <LinkIcon />
-                  <div className="flex-grow">
-                    {window.location.href.length > 40
-                      ? `${window.location.href.slice(0, 37)}...`
-                      : window.location.href}
-                  </div>
-                  <CopyToClipboardIcon
-                    className="cursor-pointer"
-                    onClick={() =>
-                      navigator.clipboard.writeText(window.location.href)
-                    }
-                  />
-                </div>
-                <div className="flex w-full aspect-square h-full justify-center items-center">
-                  <QRCode
-                    // className="hidden"
-                    size={200}
-                    value={window.location.href}
-                    logoImage="/images/logo.png"
-                    qrStyle="dots"
-                    style={{ width: "100%" }}
-                    eyeRadius={10}
-                  />
-                </div>
-              </div>
-            </div>
           )}
         </AnimatePresence>
       ) : (
