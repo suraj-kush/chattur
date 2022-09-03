@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { LogOutIcon } from "../Icons"
 
 import { useAuth } from "../middleware/authentication"
+import SignIn from "./SignIn"
 
 const Header = () => {
   const { user, login, logout } = useAuth()
@@ -29,15 +30,18 @@ const Header = () => {
             </button>
           </div>
         ) : (
+          <>
           <button
             className="bg-yellow py-1 px-5 text-white  font-semibold text-xs cursor-pointer rounded border-2 border-transparent hover:border-yellow hover:bg-transparent hover:text-yellow duration-200"
-            onClick={login}
+            // onClick={login}
+
           >
             Login
           </button>
+          </>
         )}
       </div>
-    </div>
+    </div>  
   )
 }
 
