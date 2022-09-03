@@ -6,6 +6,9 @@ import Peer from 'simple-peer'
 
 import Loading from '../components/Loading'
 
+//sounds
+import joinSoundSrc from "../sounds/join.mp3"
+
 const Room = () => {
   const [loading, setLoading] = useState(true)
   const [msgText, setMsgText] = useState('')
@@ -27,6 +30,46 @@ const Room = () => {
     }
     setMsgText('')
   }
+  const createPeer = (userToSignal, callerID, stream) => {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      stream,
+    })
+
+    peer.on('signal', (signal) => {
+      socket.current.emit('sending signal', {
+        userToSignal,
+        callerID,
+        signal,
+        user: user
+          ? {
+              //user from firebase
+            }
+          : null,
+      })
+    })
+
+    return peer
+  }
+
+  const addPeer = (incomingSignal, callerID, stream) => {
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream,
+    })
+    peer.on('signal', (signal) => {
+      socket.current.emit('returning signal', { signal, callerID })
+    })
+    const joinSound = new Audio(joinSoundSrc)
+    joinSound.play()
+    peer.signal(incomingSignal)
+    return peer
+  }
+
+  // video stream
+  
 
   return (
     <>
