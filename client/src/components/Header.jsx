@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 import { LogOutIcon } from "../Icons"
 
-import { useAuth } from "../middleware/authentication"
+import { useAuth } from "../middleware/Authentication"
 import SignIn from "./SignIn"
 
 const Header = () => {
