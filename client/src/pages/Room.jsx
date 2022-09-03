@@ -8,10 +8,12 @@ import Loading from '../components/Loading'
 
 //sounds
 import joinSoundSrc from "../sounds/join.mp3"
+import msgSoundSrc from "../sounds/message.mp3"
 
 const Room = () => {
   const [loading, setLoading] = useState(true)
   const [msgText, setMsgText] = useState('')
+  const [msgs, setMsgs] = useState([])
   const { roomID } = useParams()
   const socket = useRef()
 
@@ -69,7 +71,35 @@ const Room = () => {
   }
 
   // video stream
-  
+  useEffect(() => {
+    const video = () =>{
+        socket.current = io.connect(
+            process.env.BACKENDURL || "http://localhost:5000"
+        )
+        socket.current.on("message", (data)=>{
+            const msgAudio = new Audio(msgSoundSrc)
+            if(user?.uid !== data.user.id){
+                console.log("send")
+                msgAudio.play()
+            }
+            const msg = {
+                send: user?.uid === data.user.id,
+                ...data
+            }
+            setMsgs([...msgs, msg])
+            console.log(msgs)
+        })
+        if(user){
+            navigator.mediaDevices.getUserMedia({
+                video: true, 
+                audio: true
+            })
+            .then((stream)){
+                
+            }
+        }
+    }
+  },[roomID])
 
   return (
     <>
