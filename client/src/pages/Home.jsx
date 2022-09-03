@@ -50,8 +50,8 @@ const Home = () => {
 
   return (
     <div className="bg-darkBlue1 min-h-screen text-slate-400 content-center ">
-      <div className="flex-grow md:border-l-2 border-lightGray p-3 md:p-4">
-        <div className="relative md:h-52 w-full bg-slate-500 rounded md:rounded-2xl p-3">
+      <div className="flex flex-row justify-center md:border-l-2 border-lightGray p-3 md:p-4">
+        <div className="relative md:h-52 w-[28rem] bg-slate-500 rounded md:rounded-2xl p-3">
           <div className="md:absolute bottom-2 left-2 md:bottom-6 md:left-6">
             <p className="md:text-7xl text-4xl text-white">
               {`${
@@ -70,9 +70,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="flex-col md:gap-2 flex-col md:flex-row justify-items-center">
+      <div className="md:gap-2 flex-col md:flex-row">
         <div className="p-10">
-          <div className="flex gap-2 md:gap-6 mb-3 md:mb-6 justify-items-center">
+          <div className="flex flex-row gap-2 md:gap-6 mb-3 md:mb-6 justify-center">
             <Link to={`/room/${roomId}`} className="block">
               <HomeCard
                 title="New Meeting"
