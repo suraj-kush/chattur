@@ -1,8 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import { GoogleIcon } from '../Icons';
 
+import { useAuth } from '../middleware/Authentication';
+
 const SignIn = () => {
+    const {login, loginGoogle} = useAuth();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-darkBlue1">
             <div className="w-96 p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
@@ -19,6 +25,8 @@ const SignIn = () => {
                         </label>
                         <input
                             type="email"
+                            value={email}
+                            onChange={e=>setEmail(e.target.value)}
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
@@ -31,12 +39,16 @@ const SignIn = () => {
                         </label>
                         <input
                             type="password"
+                            value={password}
+                            onChange={e=>setPassword(e.target.value)}
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
                    
                     <div className="mt-6">
-                        <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                        <button 
+                        onClick={login(email, password)}
+                        className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
                             Sign In
                         </button>
                     </div>
@@ -48,6 +60,7 @@ const SignIn = () => {
                     <button
                         type="button"
                         className="flex focus:outline-none bg-blue items-center justify-center w-full p-2 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-violet-600"
+                        onClick={loginGoogle}
                     >
                        <div className='bg-white'> <GoogleIcon /> </div>
                         <div className='px-12 mx-5 font-semibold'>Sign in with Google</div> 

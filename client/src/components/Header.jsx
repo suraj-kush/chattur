@@ -4,10 +4,9 @@ import { Link } from "react-router-dom"
 import { LogOutIcon } from "../Icons"
 
 import { useAuth } from "../middleware/Authentication"
-import SignIn from "./SignIn"
 
 const Header = () => {
-  const { user, login, logout } = useAuth()
+  const { user, logout } = useAuth()
   return (
     <div className="h-16 px-3 bg-darkBlue1 text-slate-300 w-full flex items-center border-b-2 border-lightGray">
       <div className="flex-grow font-semibold">
