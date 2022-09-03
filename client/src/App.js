@@ -7,7 +7,7 @@ import { Header } from "./components"
 
 // pages
 // import Home from "../page/Home";
-import Room from "./pages/Room";
+import Room from "./pages/Room"
 import NotFound from "./pages/NotFound"
 
 const App = () => {
