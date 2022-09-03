@@ -14,6 +14,8 @@ import joinSoundSrc from "../sounds/join.mp3"
 import msgSoundSrc from "../sounds/message.mp3"
 import leaveSoundSrc from "../sounds/leave.mp3"
 
+
+
 import { IoChatboxOutline as ChatIcon } from "react-icons/io5"
 import { VscTriangleDown as DownIcon } from "react-icons/vsc"
 import { FaUsers as UsersIcon } from "react-icons/fa"
@@ -54,7 +56,7 @@ const Room = () => {
   const localVideo = useRef()
 
   // user
-  const { user, login } = useAuth()
+  const { user, loginGoogle } = useAuth()
 
   //functions
   const sendMessage = (e) => {
@@ -119,7 +121,7 @@ const Room = () => {
   useEffect(() => {
     const video = () => {
       socket.current = io.connect(
-        process.env.BACKENDURL || "http://localhost:5000"
+        process.env.REACT_APP_BACKEsND_URL || "http://localhost:500"
       )
       socket.current.on("message", (data) => {
         const msgAudio = new Audio(msgSoundSrc)
@@ -592,7 +594,7 @@ const Room = () => {
         <div className="h-full bg-darkBlue2 flex items-center justify-center">
           <button
             className="flex items-center gap-2 p-1 pr-3 rounded text-white font-bold bg-blue transition-all"
-            onClick={login}
+            onClick={loginGoogle}
           >
             <div className="p-2 bg-white rounded">
               <GoogleIcon size={24} />
