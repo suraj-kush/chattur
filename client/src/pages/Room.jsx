@@ -283,8 +283,7 @@ const Room = () => {
                           </div>
                         )}
 
-                        <div className="absolute bottom-4 right-4">
-                        </div>
+                        <div className="absolute bottom-4 right-4"></div>
                         <div className="absolute bottom-4 left-4">
                           <div className="bg-slate-800/70 backdrop-blur border-gray border-2  py-1 px-3 cursor-pointer rounded-md text-white text-xs">
                             {user?.displayName}
@@ -482,16 +481,20 @@ const Room = () => {
                           </div>
                           <div className="ml-2 text-sm font">Chat</div>
                           <div
-                            className="ml-auto text-lg"
+                            className={`${
+                              chatBoxOpen && "rotate-180"
+                            } transition-all  ml-auto text-lg`}
                             onClick={() => setChatBoxOpen(!chatBoxOpen)}
-                          >
+                          > 
                             <DownIcon />
                           </div>
                         </div>
                         <motion.div
                           layout
                           ref={chatScroll}
-                          className="p-3 h-full overflow-y-scroll flex flex-col gap-4"
+                          className={`${
+                            chatBoxOpen ? "block" : "hidden"
+                          } p-3 h-full overflow-y-scroll flex flex-col gap-4`}
                         >
                           {msgs.map((msg, index) => (
                             <motion.div
