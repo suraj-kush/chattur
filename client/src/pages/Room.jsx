@@ -14,23 +14,25 @@ import joinSoundSrc from "../sounds/join.mp3"
 import msgSoundSrc from "../sounds/message.mp3"
 import leaveSoundSrc from "../sounds/leave.mp3"
 
-import { IoChatboxOutline as ChatIcon } from "react-icons/io5"
-import { VscTriangleDown as DownIcon } from "react-icons/vsc"
-import { FaUsers as UsersIcon } from "react-icons/fa"
-import { FiSend as SendIcon } from "react-icons/fi"
-import { FcGoogle as GoogleIcon } from "react-icons/fc"
-import { MdCallEnd as CallEndIcon } from "react-icons/md"
-import { MdClear as ClearIcon } from "react-icons/md"
-import { AiOutlineLink as LinkIcon } from "react-icons/ai"
-import { MdOutlineContentCopy as CopyToClipboardIcon } from "react-icons/md"
-// import { MdScreenShare as ScreenShareIcon } from "react-icons/md";
-import { IoVideocamSharp as VideoOnIcon } from "react-icons/io5"
-import { IoVideocamOff as VideoOffIcon } from "react-icons/io5"
-import { AiOutlineShareAlt as ShareIcon } from "react-icons/ai"
-import { IoMic as MicOnIcon } from "react-icons/io5"
-import { IoMicOff as MicOffIcon } from "react-icons/io5"
-import { BsPin as PinIcon } from "react-icons/bs"
-import { BsPinFill as PinActiveIcon } from "react-icons/bs"
+//icons
+import {
+  ChatIcon,
+  DownIcon,
+  UsersIcon,
+  SendIcon,
+  GoogleIcon,
+  CallEndIcon,
+  ClearIcon,
+  LinkIcon,
+  CopyToClipboardIcon,
+  VideoOnIcon,
+  VideoOffIcon,
+  ShareIcon,
+  MicOffIcon,
+  MicOnIcon,
+  PinIcon,
+  PinActiveIcon
+} from "../Icons"
 
 import { QRCode } from "react-qrcode-logo"
 

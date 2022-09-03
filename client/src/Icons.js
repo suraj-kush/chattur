@@ -15,7 +15,12 @@ import { VscTriangleDown } from "react-icons/vsc"
 import { FaUserAlt } from "react-icons/fa"
 import { FiSend } from "react-icons/fi"
 import { FcGoogle } from "react-icons/fc"
-import { MdClear, MdOutlineContentCopy, MdScreenShare } from "react-icons/md"
+import {
+  MdClear,
+  MdOutlineContentCopy,
+  MdScreenShare,
+  MdCallEnd
+} from "react-icons/md"
 
 export const LogOutIcon = () => <AiOutlineLogout />
 export const PinActiveIcon = () => <BsPinFill />
@@ -34,3 +39,4 @@ export const VideoOffIcon = () => <IoVideocamOff />
 export const ShareIcon = () => <AiOutlineShareAlt />
 export const MicOnIcon = () => <IoMic />
 export const MicOffIcon = () => <IoMicOff />
+export const CallEndIcon = () => <MdCallEnd />
