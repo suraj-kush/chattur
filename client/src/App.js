@@ -12,7 +12,7 @@ import NotFound from "./pages/NotFound"
 
 const App = () => {
   return (
-    <div className="max-h-screen h-screen overflow-auto w-full">
+    <div className="h-screen overflow-auto w-full">
       <Header />
       {/* <div className="h-screen bg-red">sd</div> */}
       <Routes>
