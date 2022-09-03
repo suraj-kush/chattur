@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom"
 import { Header } from "./components"
 
 // pages
-// import Home from "../page/Home";
+import Home from "./pages/Home";
 import Room from "./pages/Room"
 import NotFound from "./pages/NotFound"
 
@@ -16,7 +16,7 @@ const App = () => {
       <div className="max-h-screen overflow-auto w-full">
         <Header />
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/" element={<Room />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
