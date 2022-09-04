@@ -45,7 +45,7 @@ const MeetGridCard = ({ user, micActive, peer }) => {
         ref={videoRef}
         autoPlay
         controls={false}
-        className="h-full w-full object-cover rounded-lg"
+        className="h-full w-full object-cover rounded-lg scale-x-[-1]"
       />
       {!videoActive && (
         <div className="absolute top-0 left-0 bg-lightGray h-full w-full flex items-center justify-center">

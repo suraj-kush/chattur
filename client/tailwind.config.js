@@ -14,6 +14,9 @@ module.exports = {
         yellow: "#ff742f",
         lightYellow: "#ff884c",
         red: "#dd3d3d"
+      },
+      scale: {
+        '-1': '-1'
       }
     }
   },
