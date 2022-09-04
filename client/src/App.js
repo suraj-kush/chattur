@@ -19,11 +19,8 @@ const App = () => {
       <div className="max-h-screen overflow-auto w-full">
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/room/:roomID"
-            element={user ? <Room /> : <SignIn goTo="/room/:roomID" />}
-          />
+          <Route path="/" element={<Home  />} />
+          <Route path="/room/:roomID" element={<Room /> }/>
           <Route path="/signin" element={<SignIn goTo="/" />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
