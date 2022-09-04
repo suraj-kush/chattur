@@ -12,9 +12,10 @@ import {
 } from "react-icons/io5"
 import { BsPin, BsPinFill } from "react-icons/bs"
 import { VscTriangleDown } from "react-icons/vsc"
-import { FaUserAlt } from "react-icons/fa"
+import { FaUserAlt, FaPowerOff } from "react-icons/fa"
 import { FiSend } from "react-icons/fi"
 import { FcGoogle } from "react-icons/fc"
+import { GiCancel } from "react-icons/gi"
 import {
   MdClear,
   MdVideoCall,
@@ -44,3 +45,5 @@ export const MicOffIcon = () => <IoMicOff />
 export const CallEndIcon = () => <MdCallEnd />
 export const NewCallIcon = () => <MdVideoCall />
 export const JoinCallIcon = () => <MdAddBox />
+export const PowerOffIcon = () => <FaPowerOff />
+export const CancelIcon = () => <GiCancel />
