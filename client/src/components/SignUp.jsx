@@ -147,7 +147,7 @@ const SignUp = () => {
               {" "}
               <GoogleIcon />{" "}
             </div>
-            <div className="px-12 mx-5 font-semibold">Continue with Google</div>
+            <div className="px-11 mx-4 font-semibold">Continue with Google</div>
           </button>
         </div>
       </div>
