@@ -1,15 +1,31 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { GoogleIcon } from '../Icons';
+
+import { auth } from "../firebase/config"
+
+import {signInWithEmailAndPassword} from "firebase/auth"
 
 import { useAuth } from '../middleware/Authentication';
 import {useNavigate} from "react-router-dom";
 
-const SignIn = () => {
+const SignIn = ({goTo}) => {
     const navigate = useNavigate();
     const {login, user, loginGoogle} = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    // function wrongPassword(){
+
+    // }
+    // useEffect(()=>{
+    //     if(user==null)  alert("wrong password!");
+    //     else{
+    //        navigate(goTo);
+    //     }
+    // },[user]);  
+
+    
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-darkBlue1">
@@ -50,8 +66,20 @@ const SignIn = () => {
                     <div className="mt-6">
                         <button 
                         onClick={(e)=>{
-                            login(email, password);
-                            navigate("/");
+                           
+                           signInWithEmailAndPassword(auth, email, password)
+                           .then((userCredential) => {
+                            const user = userCredential.user
+                            console.log("logged in")
+                            navigate(goTo);
+                            })
+                            .catch((error) => {
+                            const errorCode = error.code
+                            const errorMessage = error.message
+                            console.log(errorMessage)
+                            alert("wrong password");
+                            })
+                            
                             e.preventDefault();
                         }}
                         className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
@@ -69,7 +97,7 @@ const SignIn = () => {
                         onClick={()=>{
                             loginGoogle();
                             setTimeout(()=>{
-                                navigate("/");
+                                navigate(goTo);
                             }, 7500);
                             
                         }}
