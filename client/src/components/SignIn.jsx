@@ -5,7 +5,7 @@ import { GoogleIcon } from '../Icons';
 import { useAuth } from '../middleware/Authentication';
 import {useNavigate} from "react-router-dom";
 
-const SignIn = () => {
+const SignIn = ({goTo}) => {
     const navigate = useNavigate();
     const {login, user, loginGoogle} = useAuth();
     const [email, setEmail] = useState("");
@@ -51,7 +51,7 @@ const SignIn = () => {
                         <button 
                         onClick={(e)=>{
                             login(email, password);
-                            navigate("/");
+                            navigate(goTo);
                             e.preventDefault();
                         }}
                         className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
@@ -69,7 +69,7 @@ const SignIn = () => {
                         onClick={()=>{
                             loginGoogle();
                             setTimeout(()=>{
-                                navigate("/");
+                                navigate(goTo);
                             }, 7500);
                             
                         }}
