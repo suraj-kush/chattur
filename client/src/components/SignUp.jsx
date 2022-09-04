@@ -109,7 +109,10 @@ const SignUp = () => {
                 <div className="flex mt-4 gap-x-2">
                     <button
                         type="button"
-                        onClick={loginGoogle}
+                        onClick={()=>{
+                            loginGoogle();
+                            navigate("/");
+                        }}
                         className="flex focus:outline-none bg-blue items-center justify-center w-full p-2 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-violet-600"
                     >
                        <div className='bg-white'> <GoogleIcon /> </div>
