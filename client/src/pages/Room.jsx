@@ -565,7 +565,7 @@ const Room = () => {
                           newestOnTop={false}
                           closeOnClick
                           rtl={false}
-                          pauseOnFocusLoss
+                          pauseOnFocusLoss={false}
                           draggable
                           pauseOnHover={false}
                         />
