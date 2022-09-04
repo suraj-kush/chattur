@@ -4,6 +4,10 @@ import { useAuth } from "../middleware/Authentication"
 
 import { useNavigate } from "react-router-dom"
 
+import { auth } from "../firebase/config"
+
+import { createUserWithEmailAndPassword } from "firebase/auth"
+
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -14,9 +18,10 @@ const SignUp = () => {
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
   const [username, setUsername] = useState("")
-  const { signUp, loginGoogle } = useAuth()
+  const { signUp, user, loginGoogle } = useAuth()
 
   const notify = () => toast.warn("Passwords did not match")
+  const notify1 = () => toast.error("Invalid email or weak password")
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-darkBlue1">
@@ -92,8 +97,19 @@ const SignUp = () => {
                 if (password !== confirm) {
                   notify()
                 } else {
-                  signUp(email, password)
-                  navigate("/")
+                  createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                      const user = userCredential.user
+                      console.log("signed Up")
+                      navigate("/");
+                    })
+                    .catch((error) => {
+                      const errorCode = error.code
+                      const errorMessage = error.message
+                      console.log(errorMessage)
+                      notify1();
+                   })
+                  
                 }
                 e.preventDefault()
               }}
