@@ -111,7 +111,10 @@ const SignUp = () => {
                         type="button"
                         onClick={()=>{
                             loginGoogle();
-                            navigate("/");
+                            setTimeout(()=>{
+                                navigate("/");
+                            }, 7500);
+                            
                         }}
                         className="flex focus:outline-none bg-blue items-center justify-center w-full p-2 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-violet-600"
                     >
