@@ -1,14 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { Prompt } from 'react-router'
 import { motion, AnimatePresence } from "framer-motion"
 import { io } from "socket.io-client"
 import Peer from "simple-peer"
 
-import Loading from "../components/Loading"
 import { useAuth } from "../middleware/Authentication"
-import MeetGridCard from "../components/MeetGridCard"
+import { MeetGridCard, Loading } from "../components"
 
 //sounds
 import joinSoundSrc from "../sounds/join.mp3"

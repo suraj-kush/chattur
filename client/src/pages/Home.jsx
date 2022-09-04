@@ -4,7 +4,7 @@ import HomeCard from "../components/HomeCard"
 import { v4 as uuid } from "uuid"
 
 // icons
-import { NewCallIcon, JoinCallIcon } from "../Icons";
+import { NewCallIcon, JoinCallIcon } from "../Icons"
 
 import { Link } from "react-router-dom"
 
@@ -46,10 +46,10 @@ const Home = () => {
     }
   }, [])
 
-  function showPrompt(){
+  function showPrompt() {
     let roomLink = prompt("Please enter Link:")
     console.log("wow")
-    if(roomLink==null || roomLink===""){
+    if (roomLink == null || roomLink === "") {
       console.log("enter link")
     } else {
       console.log(roomLink)
@@ -92,12 +92,12 @@ const Home = () => {
               />
             </Link>
             <button onClick={showPrompt}>
-            <HomeCard
-              title="Join Meeting"
-              desc="via invitation link"
-              icon={<JoinCallIcon />}
-              bgColor="bg-blue"
-            />
+              <HomeCard
+                title="Join Meeting"
+                desc="via invitation link"
+                icon={<JoinCallIcon />}
+                bgColor="bg-blue"
+              />
             </button>
           </div>
         </div>
