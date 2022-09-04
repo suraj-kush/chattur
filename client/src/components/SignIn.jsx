@@ -1,4 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { GoogleIcon } from '../Icons';
 
@@ -15,16 +18,7 @@ const SignIn = ({goTo}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // function wrongPassword(){
-
-    // }
-    // useEffect(()=>{
-    //     if(user==null)  alert("wrong password!");
-    //     else{
-    //        navigate(goTo);
-    //     }
-    // },[user]);  
-
+    const notify = () => toast.error("Wrong email or password");
     
 
   return (
@@ -77,7 +71,7 @@ const SignIn = ({goTo}) => {
                             const errorCode = error.code
                             const errorMessage = error.message
                             console.log(errorMessage)
-                            alert("wrong password");
+                            notify();
                             })
                             
                             e.preventDefault();
@@ -85,6 +79,16 @@ const SignIn = ({goTo}) => {
                         className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
                             Sign In
                         </button>
+                        <ToastContainer
+                            position="bottom-left"
+                            autoClose={3000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover={false} />
                     </div>
                 </form>
                 <div className="relative flex items-center justify-center w-full mt-6 border border-t">
