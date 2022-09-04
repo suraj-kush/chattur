@@ -13,7 +13,7 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
     const [username, setUsername] = useState("");
-
+    const [showhMessage, setMessage] = useState(false);
     const {signUp, loginGoogle} = useAuth();
 
   return (
@@ -84,17 +84,17 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <p id='mismatch' className='text-red text-sm' >*Passwords do not match</p>
+                   { showhMessage ? <p id='mismatch' className='text-red text-sm' >*Passwords do not match</p> : null}
                    
                     <div className="mt-6">
                         <button 
                         onClick={(e)=>{
                            if(password!==confirm){
-                            alert("Passwords don't match");
+                            setMessage(true);
                            }else{
                             signUp(email, password);
+                            setMessage(false);
                             navigate("/");
-
                            }
                            e.preventDefault();
                         }}
