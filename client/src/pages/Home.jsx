@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"
 import HomeCard from "../components/HomeCard"
-
+import { JoinMeetingPopCard } from "../components"
 import { v4 as uuid } from "uuid"
-
 // icons
 import { NewCallIcon, JoinCallIcon } from "../Icons"
 
@@ -35,7 +34,7 @@ const Home = () => {
     "Saturday"
   ]
   const [date, setDate] = useState(new Date())
-
+  const [modal, setModal] = useState(false)
   function refreshClock() {
     setDate(new Date())
   }
@@ -46,14 +45,12 @@ const Home = () => {
     }
   }, [])
 
+  function toggleModal() {
+    setModal(false);
+  }
+
   function showPrompt() {
-    let roomLink = prompt("Please enter Link:")
-    console.log("wow")
-    if (roomLink == null || roomLink === "") {
-      console.log("enter link")
-    } else {
-      console.log(roomLink)
-    }
+    setModal(true)
   }
 
   return (
@@ -99,6 +96,7 @@ const Home = () => {
                 bgColor="bg-blue"
               />
             </button>
+            {modal ? <JoinMeetingPopCard closeModal = {toggleModal} />: null}
           </div>
         </div>
       </div>
