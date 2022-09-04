@@ -58,12 +58,14 @@ const Home = () => {
 
   return (
     <div className="flex flex-col justify-center bg-darkBlue1 min-h-screen text-slate-400 content-center ">
-      <div className="flex flex-row justify-center md:border-l-2 border-lightGray p-3 md:p-4">
+      <div className="flex flex-row justify-center p-3 md:p-4">
         <div className="text-center flex flex-col justify-center md:h-52 w-[28rem] bg-slate-500 rounded md:rounded-2xl p-3">
           <div>
             <p className="md:text-7xl text-4xl text-white">
               {`${
-                date.getHours() < 10 ? `0${date.getHours()}&nbsp;` : date.getHours()
+                date.getHours() < 10
+                  ? `0${date.getHours()}&nbsp;`
+                  : date.getHours()
               }:${
                 date.getMinutes() < 10
                   ? `0${date.getMinutes()}`

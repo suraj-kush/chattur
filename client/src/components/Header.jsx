@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 import { LogOutIcon } from "../Icons"
 
-import { useAuth } from "../middleware/Authentication"
+import { useAuth } from "../auth/Authentication"
 
 import { LogoutConfirmation } from "./"
 //logo

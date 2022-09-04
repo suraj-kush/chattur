@@ -9,7 +9,7 @@ import { auth } from "../firebase/config"
 
 import { signInWithEmailAndPassword } from "firebase/auth"
 
-import { useAuth } from "../middleware/Authentication"
+import { useAuth } from "../auth/Authentication"
 import { useNavigate } from "react-router-dom"
 
 const SignIn = ({ goTo }) => {

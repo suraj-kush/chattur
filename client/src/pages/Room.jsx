@@ -8,7 +8,7 @@ import Peer from "simple-peer"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-import { useAuth } from "../middleware/Authentication"
+import { useAuth } from "../auth/Authentication"
 import { MeetGridCard, Loading, SignIn } from "../components"
 
 //sounds
@@ -553,10 +553,7 @@ const Room = () => {
                             navigator.clipboard.writeText(window.location.href)
                           }}
                         >
-                          <ShareIcon
-                            className="cursor-pointer"
-                            size={22}
-                          />
+                          <ShareIcon className="cursor-pointer" size={22} />
                         </button>
                         <ToastContainer
                           position="bottom-left"

@@ -10,7 +10,7 @@ import Home from "./pages/Home"
 import Room from "./pages/Room"
 import NotFound from "./pages/NotFound"
 
-import { useAuth } from "./middleware/Authentication"
+import { useAuth } from "./auth/Authentication"
 
 const App = () => {
   const { user } = useAuth()
