@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 import { useAuth } from "../middleware/Authentication"
-import { MeetGridCard, Loading } from "../components"
+import { MeetGridCard, Loading, SignIn } from "../components"
 
 //sounds
 import joinSoundSrc from "../sounds/join.mp3"
@@ -592,17 +592,7 @@ const Room = () => {
           )}
         </AnimatePresence>
       ) : (
-        <div className="h-full bg-darkBlue2 flex items-center justify-center">
-          <button
-            className="flex items-center gap-2 p-1 pr-3 rounded text-white font-bold bg-blue transition-all"
-            onClick={loginGoogle}
-          >
-            <div className="p-2 bg-white rounded">
-              <GoogleIcon size={24} />
-            </div>
-            Login with Google
-          </button>
-        </div>
+        <SignIn />
       )}
     </>
   )
