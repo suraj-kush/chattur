@@ -37,7 +37,7 @@ import {
 const Room = () => {
   const [loading, setLoading] = useState(true)
   const [localStream, setLocalStream] = useState(null)
-  const [micOn, setMicOn] = useState(false)
+  const [micOn, setMicOn] = useState(true)
   const [showChat, setshowChat] = useState(false)
   const [pin, setPin] = useState(false)
   const [peers, setPeers] = useState([])

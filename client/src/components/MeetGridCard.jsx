@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from "react"
 
 import { motion } from "framer-motion"
@@ -5,22 +6,20 @@ import { motion } from "framer-motion"
 import { MicOnIcon, MicOffIcon, PinIcon, PinActiveIcon } from "../Icons"
 
 const MeetGridCard = ({ user, peer }) => {
+  let currName = (user?.email).substring(0, user?.email.indexOf("@"))
+  currName = currName.charAt(0).toUpperCase() + currName.slice(1)
+  console.log(currName)
   const [pin, setPin] = useState(false)
   const videoRef = useRef()
   const [videoActive, setVideoActive] = useState(true)
-  const [micActive, setMicActive] = useState(true)
   useEffect(() => {
     peer.on("stream", (stream) => {
       setVideoActive(
         stream.getTracks().find((track) => track.kind === "video").enabled
       )
-      console.log(stream)
       videoRef.current.srcObject = stream
-      setMicActive(
-        stream.getTracks().find((track) => track.kind === "audio").enabled
-      )
     })
-  }, [videoActive])
+  }, [])
   return (
     <motion.div
       layout
@@ -70,10 +69,9 @@ const MeetGridCard = ({ user, peer }) => {
         controls={false}
         className="h-full w-full object-cover rounded-lg scale-x-[-1]"
       />
-      {!micActive && <div>hi</div>}
       <div className="absolute bottom-4 left-4">
         <div className="bg-slate-800/70 backdrop-blur border-gray border-2  py-1 px-3 cursor-pointer rounded-md text-white text-xs">
-          {user?.name || "Anonymous"}
+          {user?.name || currName}
         </div>
       </div>
     </motion.div>
