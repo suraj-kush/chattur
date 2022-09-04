@@ -1,16 +1,38 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 
 import { LogOutIcon } from "../Icons"
 
 import { useAuth } from "../middleware/Authentication"
 
+import { LogoutConfirmation } from "./"
+
 const Header = () => {
+  const navigate = useNavigate()
   const { user, logout } = useAuth()
+
+  const [confirmation, setConfirmation] = useState(false)
+
+  function logoutPrompt() {
+    setConfirmation(true)
+  }
+  function goHome() {
+    navigate("/")
+    window.location.reload()
+  }
+  function yesLogout() {
+    setConfirmation(false)
+    logout()
+    goHome()
+  }
+  function cancel() {
+    setConfirmation(false)
+  }
+
   return (
     <div className="h-16 px-3 bg-darkBlue1 text-slate-300 w-full flex items-center border-b-2 border-lightGray">
       <div className="flex-grow font-semibold">
-        <Link to="/">Chattur</Link>
+        <button onClick={goHome}>Chattur</button>
       </div>
       <div>
         {user ? (
@@ -22,11 +44,14 @@ const Header = () => {
             />
             <button
               className="absolute flex opacity-0 transition-all pointer-events-none group-hover:pointer-events-auto group-hover:opacity-100  items-center justify-center top-0 left-0 h-full w-full bg-black/70"
-              onClick={logout}
+              onClick={logoutPrompt}
               title="Logout"
             >
               <LogOutIcon />
             </button>
+            {confirmation && (
+              <LogoutConfirmation yesLogout={yesLogout} cancel={cancel} />
+            )}
           </div>
         ) : (
           <>

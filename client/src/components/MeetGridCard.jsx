@@ -1,10 +1,14 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from "react"
 
 import { motion } from "framer-motion"
 
 import { MicOnIcon, MicOffIcon, PinIcon, PinActiveIcon } from "../Icons"
 
-const MeetGridCard = ({ user, micActive, peer }) => {
+const MeetGridCard = ({ user, peer }) => {
+  let currName = (user?.email).substring(0, user?.email.indexOf("@"))
+  currName = currName.charAt(0).toUpperCase() + currName.slice(1)
+  console.log(currName)
   const [pin, setPin] = useState(false)
   const videoRef = useRef()
   const [videoActive, setVideoActive] = useState(true)
@@ -45,7 +49,7 @@ const MeetGridCard = ({ user, micActive, peer }) => {
         ref={videoRef}
         autoPlay
         controls={false}
-        className="h-full w-full object-cover rounded-lg"
+        className="h-full w-full object-cover rounded-lg scale-x-[-1]"
       />
       {!videoActive && (
         <div className="absolute top-0 left-0 bg-lightGray h-full w-full flex items-center justify-center">
@@ -59,24 +63,15 @@ const MeetGridCard = ({ user, micActive, peer }) => {
           />
         </div>
       )}
-      {/* <div className="absolute bottom-4 right-4">
-          <button
-            className={`${
-              micActive
-                ? "bg-blue border-transparent"
-                : "bg-slate-800/70 backdrop-blur border-gray"
-            } md:border-2 border-[1px] aspect-square opacity-80 md:p-2.5 p-1.5 cursor-default md:rounded-xl rounded-lg text-white md:text-xl text-lg`}
-            // onClick={() => {
-            //   setMicOn(!micActive);
-            //   joinSound.play();
-            // }}
-          >
-            {micActive ? <MicOnIcon /> : <MicOffIcon />}
-          </button>
-        </div> */}
+      <video
+        ref={videoRef}
+        autoPlay
+        controls={false}
+        className="h-full w-full object-cover rounded-lg scale-x-[-1]"
+      />
       <div className="absolute bottom-4 left-4">
         <div className="bg-slate-800/70 backdrop-blur border-gray border-2  py-1 px-3 cursor-pointer rounded-md text-white text-xs">
-          {user?.name || "Anonymous"}
+          {user?.name || currName}
         </div>
       </div>
     </motion.div>

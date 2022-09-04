@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from "framer-motion"
 import { io } from "socket.io-client"
 import Peer from "simple-peer"
 
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 import { useAuth } from "../middleware/Authentication"
 import { MeetGridCard, Loading } from "../components"
 
@@ -35,7 +38,7 @@ const Room = () => {
   const [loading, setLoading] = useState(true)
   const [localStream, setLocalStream] = useState(null)
   const [micOn, setMicOn] = useState(true)
-  const [showChat, setshowChat] = useState(true)
+  const [showChat, setshowChat] = useState(false)
   const [pin, setPin] = useState(false)
   const [peers, setPeers] = useState([])
   const [msgs, setMsgs] = useState([])
@@ -49,11 +52,12 @@ const Room = () => {
   const socket = useRef()
   const peersRef = useRef([])
   const localVideo = useRef()
-
   // user
   const { user, loginGoogle } = useAuth()
 
   //functions
+  const notify = () => toast.success("Link has been copied!")
+
   const sendMessage = (e) => {
     e.preventDefault()
     if (msgText) {
@@ -268,7 +272,7 @@ const Room = () => {
                             muted
                             autoPlay
                             controls={false}
-                            className="h-full w-full object-cover rounded-lg"
+                            className="h-full w-full object-cover rounded-lg scale-x-[-1]"
                           />
                           {!videoActive && (
                             <div className="absolute top-0 left-0 bg-lightGray h-full w-full flex items-center justify-center">
@@ -279,11 +283,18 @@ const Room = () => {
                               />
                             </div>
                           )}
-
+                          <div
+                            className={`${
+                              !micOn &&
+                              "bg-slate-800/70 backdrop-blur border-gray border-2  p-2 cursor-pointer rounded-xl text-white text-sm absolute bottom-4 right-4"
+                            }`}
+                          >
+                            {!micOn && <MicOffIcon size={15} />}
+                          </div>
                           <div className="absolute bottom-4 right-4"></div>
                           <div className="absolute bottom-4 left-4">
                             <div className="bg-slate-800/70 backdrop-blur border-gray border-2  py-1 px-3 cursor-pointer rounded-md text-white text-xs">
-                              {user?.displayName}
+                              You
                             </div>
                           </div>
                         </motion.div>
@@ -537,15 +548,27 @@ const Room = () => {
                         <button
                           className={`bg-slate-800/70 backdrop-blur border-gray
           border-2  p-2 cursor-pointer rounded-xl text-white text-xl hover:bg-green-400`}
-                          onClick={() =>
+                          onClick={() => {
+                            notify()
                             navigator.clipboard.writeText(window.location.href)
-                          }
+                          }}
                         >
                           <CopyToClipboardIcon
                             className="cursor-pointer"
                             size={22}
                           />
                         </button>
+                        <ToastContainer
+                          position="bottom-left"
+                          autoClose={1500}
+                          hideProgressBar={false}
+                          newestOnTop={false}
+                          closeOnClick
+                          rtl={false}
+                          pauseOnFocusLoss
+                          draggable
+                          pauseOnHover={false}
+                        />
                       </motion.div>
                       <motion.div whileTap={{ scale: 0.9 }}>
                         <button
