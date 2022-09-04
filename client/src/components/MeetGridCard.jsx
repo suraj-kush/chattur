@@ -4,18 +4,23 @@ import { motion } from "framer-motion"
 
 import { MicOnIcon, MicOffIcon, PinIcon, PinActiveIcon } from "../Icons"
 
-const MeetGridCard = ({ user, micActive, peer }) => {
+const MeetGridCard = ({ user, peer }) => {
   const [pin, setPin] = useState(false)
   const videoRef = useRef()
   const [videoActive, setVideoActive] = useState(true)
+  const [micActive, setMicActive] = useState(true)
   useEffect(() => {
     peer.on("stream", (stream) => {
       setVideoActive(
         stream.getTracks().find((track) => track.kind === "video").enabled
       )
+      console.log(stream)
       videoRef.current.srcObject = stream
+      setMicActive(
+        stream.getTracks().find((track) => track.kind === "audio").enabled
+      )
     })
-  }, [])
+  }, [videoActive])
   return (
     <motion.div
       layout
@@ -59,21 +64,13 @@ const MeetGridCard = ({ user, micActive, peer }) => {
           />
         </div>
       )}
-      {/* <div className="absolute bottom-4 right-4">
-          <button
-            className={`${
-              micActive
-                ? "bg-blue border-transparent"
-                : "bg-slate-800/70 backdrop-blur border-gray"
-            } md:border-2 border-[1px] aspect-square opacity-80 md:p-2.5 p-1.5 cursor-default md:rounded-xl rounded-lg text-white md:text-xl text-lg`}
-            // onClick={() => {
-            //   setMicOn(!micActive);
-            //   joinSound.play();
-            // }}
-          >
-            {micActive ? <MicOnIcon /> : <MicOffIcon />}
-          </button>
-        </div> */}
+      <video
+        ref={videoRef}
+        autoPlay
+        controls={false}
+        className="h-full w-full object-cover rounded-lg scale-x-[-1]"
+      />
+      {!micActive && <div>hi</div>}
       <div className="absolute bottom-4 left-4">
         <div className="bg-slate-800/70 backdrop-blur border-gray border-2  py-1 px-3 cursor-pointer rounded-md text-white text-xs">
           {user?.name || "Anonymous"}

@@ -34,8 +34,8 @@ import {
 const Room = () => {
   const [loading, setLoading] = useState(true)
   const [localStream, setLocalStream] = useState(null)
-  const [micOn, setMicOn] = useState(true)
-  const [showChat, setshowChat] = useState(true)
+  const [micOn, setMicOn] = useState(false)
+  const [showChat, setshowChat] = useState(false)
   const [pin, setPin] = useState(false)
   const [peers, setPeers] = useState([])
   const [msgs, setMsgs] = useState([])
@@ -279,7 +279,11 @@ const Room = () => {
                               />
                             </div>
                           )}
-
+                          <div className={`${
+                                !micOn &&  "bg-slate-800/70 backdrop-blur border-gray border-2  p-2 cursor-pointer rounded-xl text-white text-sm absolute bottom-4 right-4"
+                              }`}>
+                              {!micOn && <MicOffIcon size={15}/>}
+                          </div>
                           <div className="absolute bottom-4 right-4"></div>
                           <div className="absolute bottom-4 left-4">
                             <div className="bg-slate-800/70 backdrop-blur border-gray border-2  py-1 px-3 cursor-pointer rounded-md text-white text-xs">
