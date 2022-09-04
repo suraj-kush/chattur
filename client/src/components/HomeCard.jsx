@@ -9,7 +9,7 @@ const HomeCard = ({ icon, title, desc, bgColor, route }) => {
         <div
           className={`text-white text-2xl aspect-square md:h-12 flex items-center justify-center md:text-3xl 
           md:bg-slate-400/40 group-hover:text- group-hover:scale-110 duration-200 md:p-2 md:border-[1px]
-           md:border-slate-300/40  rounded-lg`}
+           md:border-slate-300/40 rounded-lg`}
         >
           {icon}
         </div>
@@ -17,9 +17,7 @@ const HomeCard = ({ icon, title, desc, bgColor, route }) => {
           <p className="text-white md:mb-1 text-sm md:text-2xl md:font-bold">
             {title}
           </p>
-          <p className="text-slate-200 text-sm font-thin hidden md:block">
-            {desc}
-          </p>
+          <p className="text-slate-200 text-sm  hidden md:block">{desc}</p>
         </div>
       </div>
     </div>

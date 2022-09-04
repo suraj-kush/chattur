@@ -63,14 +63,14 @@ const Home = () => {
           <div>
             <p className="md:text-7xl text-4xl text-white">
               {`${
-                date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
+                date.getHours() < 10 ? `0${date.getHours()}&nbsp;` : date.getHours()
               }:${
                 date.getMinutes() < 10
                   ? `0${date.getMinutes()}`
                   : date.getMinutes()
               }`}
             </p>
-            <p className="text-slate-300 font-thin my-1">
+            <p className="text-slate-300 my-1">
               {`${days[date.getDay()]},${date.getDate()} ${
                 months[date.getMonth()]
               } ${date.getFullYear()}`}

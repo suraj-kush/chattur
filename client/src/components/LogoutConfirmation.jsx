@@ -1,12 +1,11 @@
 import React from "react"
 
-
 const LogoutConfirmation = ({ yesLogout, cancel }) => {
   return (
     <>
       <div
         tabIndex={-1}
-        className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center flex"
+        className="overflow-y-auto backdrop-blur-sm overflow-x-hidden drop-shadow-md fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center flex"
         aria-modal="true"
         role="dialog"
       >
@@ -16,7 +15,6 @@ const LogoutConfirmation = ({ yesLogout, cancel }) => {
               type="button"
               onClick={cancel}
               className="absolute top-3 right-2.5 text-black rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-              
             >
               <svg
                 aria-hidden="true"
@@ -56,7 +54,7 @@ const LogoutConfirmation = ({ yesLogout, cancel }) => {
                 data-modal-toggle="popup-modal"
                 type="button"
                 onClick={yesLogout}
-                className="text-black bg-red-600 border focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                className="text-black mr-10 hover:scale-110 border focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
               >
                 Yes
               </button>
@@ -64,7 +62,7 @@ const LogoutConfirmation = ({ yesLogout, cancel }) => {
                 data-modal-toggle="popup-modal"
                 onClick={cancel}
                 type="button"
-                className="text-black bg-white focus:ring-4 focus:outline-none  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500"
+                className="text-black hover:scale-110  bg-white focus:ring-4 focus:outline-none  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500"
               >
                 No
               </button>

@@ -22,10 +22,10 @@ import {
   DownIcon,
   UsersIcon,
   SendIcon,
-  GoogleIcon,
   CallEndIcon,
   ClearIcon,
   CopyToClipboardIcon,
+  ShareIcon,
   VideoOnIcon,
   VideoOffIcon,
   MicOffIcon,
@@ -118,7 +118,7 @@ const Room = () => {
   useEffect(() => {
     const unsub = () => {
       socket.current = io.connect(
-        process.env.REACT_BACKEND_URL || "http://localhost:5000"
+        process.env.REACT_APP_BACKEND_URL || "http://localhost:5000"
       )
       socket.current.on("message", (data) => {
         const audio = new Audio(msgSoundSrc)
@@ -293,7 +293,7 @@ const Room = () => {
                           </div>
                           <div className="absolute bottom-4 right-4"></div>
                           <div className="absolute bottom-4 left-4">
-                            <div className="bg-slate-800/70 backdrop-blur border-gray border-2  py-1 px-3 cursor-pointer rounded-md text-white text-xs">
+                            <div className="bg-slate-800/70 backdrop-blur   py-1 px-3 cursor-pointer rounded-md text-white text-xs">
                               You
                             </div>
                           </div>
@@ -480,7 +480,7 @@ const Room = () => {
                     </motion.div>
                   )}
                 </motion.div>
-                <div className="w-full h-16 bg-darkBlue1 border-t-2 border-lightGray p-3">
+                <div className="w-full h-16 bg-darkBlue1  p-3">
                   <div className="flex items-center justify-center">
                     <div className="flex gap-4">
                       <motion.div whileTap={{ scale: 0.9 }}>
@@ -553,7 +553,7 @@ const Room = () => {
                             navigator.clipboard.writeText(window.location.href)
                           }}
                         >
-                          <CopyToClipboardIcon
+                          <ShareIcon
                             className="cursor-pointer"
                             size={22}
                           />
