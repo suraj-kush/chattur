@@ -49,7 +49,7 @@ const Home = () => {
   }, [])
 
   function toggleModal() {
-    setModal(false);
+    setModal(false)
   }
 
   function showPrompt() {
@@ -100,7 +100,7 @@ const Home = () => {
                 bgColor="bg-blue"
               />
             </button>
-            {modal ? <JoinMeetingPopCard closeModal = {toggleModal} />: null}
+            {modal ? <JoinMeetingPopCard closeModal={toggleModal} /> : null}
           </div>
         </div>
       </div>

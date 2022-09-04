@@ -1,11 +1,8 @@
 import React from "react"
 
-const Modal = ({closeModal}) => {
-
+const Modal = ({ closeModal }) => {
   return (
     <>
-
-
       <div
         id="popup-modal"
         tabIndex={-1}

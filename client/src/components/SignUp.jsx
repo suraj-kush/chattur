@@ -101,15 +101,14 @@ const SignUp = () => {
                     .then((userCredential) => {
                       const user = userCredential.user
                       console.log("signed Up")
-                      navigate("/");
+                      navigate("/")
                     })
                     .catch((error) => {
                       const errorCode = error.code
                       const errorMessage = error.message
                       console.log(errorMessage)
-                      notify1();
-                   })
-                  
+                      notify1()
+                    })
                 }
                 e.preventDefault()
               }}

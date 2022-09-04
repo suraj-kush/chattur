@@ -16,7 +16,7 @@ const App = () => {
   const { user } = useAuth()
   return (
     <div className="flex">
-      <div className="max-h-screen overflow-auto w-full">
+      <div className="h-screen max-h-screen overflow-hidden w-full">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
