@@ -1,22 +1,26 @@
-import React from "react"
+import React, {useState} from "react"
 
-const Modal = ({ closeModal }) => {
+
+import { useNavigate } from "react-router-dom";
+
+const JoinMeetingPopCard = ({ closeModal }) => {
+  const navigate = useNavigate();
+  const [link, setLink] = useState("");
   return (
     <>
       <div
-        id="popup-modal"
         tabIndex={-1}
         className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center flex"
         aria-modal="true"
         role="dialog"
       >
         <div className="relative p-4 w-full max-w-md h-full md:h-auto">
-          <div className="relative bg-gray rounded-lg shadow dark:bg-gray-700">
+          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button
-              onClick={closeModal}
               type="button"
-              className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-              data-modal-toggle="popup-modal"
+              onClick={closeModal}
+              className="absolute top-3 right-2.5 text-black rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+              
             >
               <svg
                 aria-hidden="true"
@@ -33,41 +37,55 @@ const Modal = ({ closeModal }) => {
               </svg>
               <span className="sr-only">Close modal</span>
             </button>
-            <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-              Sign in to our platform
-            </h3>
             <div className="p-6 text-center">
+              <svg
+                aria-hidden="true"
+                className="mx-auto mb-4 w-14 h-14 text-black dark:text-gray-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
               <div>
                 <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  htmlFor="text"
+                  className="block mb-2 text-sm font-medium text-black dark:text-gray-300"
                 >
-                  Your email
+                  Paste joining link
                 </label>
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  type="text"
+                  value={link}
+                  onChange={(e)=>setLink(e.target.value)}
+                  className="border border-black text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400"
                   placeholder="name@company.com"
                   required=""
                 />
               </div>
               <button
-                onClick={closeModal}
                 data-modal-toggle="popup-modal"
                 type="button"
-                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                onClick={() => {
+                  navigate("room/" + link.substring(link.lastIndexOf('/')+1, link.length));
+                }}
+                className="text-black my-3 mr-4 bg-red-600 border focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
               >
-                Yes, I'm sure
+                &nbsp; Join &nbsp;
               </button>
               <button
-                onClick={closeModal}
                 data-modal-toggle="popup-modal"
+                onClick={closeModal}
                 type="button"
-                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                className="text-black ml-4 bg-white focus:ring-4 focus:outline-none  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500"
               >
-                No, cancel
+                Cancel
               </button>
             </div>
           </div>
@@ -76,4 +94,5 @@ const Modal = ({ closeModal }) => {
     </>
   )
 }
-export default Modal
+
+export default JoinMeetingPopCard
