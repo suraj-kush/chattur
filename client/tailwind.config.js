@@ -16,7 +16,7 @@ module.exports = {
         red: "#dd3d3d"
       },
       scale: {
-        '-1': '-1'
+        "-1": "-1"
       }
     }
   },

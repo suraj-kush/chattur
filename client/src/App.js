@@ -13,14 +13,17 @@ import NotFound from "./pages/NotFound"
 import { useAuth } from "./middleware/Authentication"
 
 const App = () => {
-  const {user} = useAuth();
+  const { user } = useAuth()
   return (
     <div className="flex">
       <div className="max-h-screen overflow-auto w-full">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/room/:roomID" element={user?<Room />:<SignIn goTo="/room/:roomID" />} />
+          <Route
+            path="/room/:roomID"
+            element={user ? <Room /> : <SignIn goTo="/room/:roomID" />}
+          />
           <Route path="/signin" element={<SignIn goTo="/" />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />

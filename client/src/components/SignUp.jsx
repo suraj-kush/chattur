@@ -14,9 +14,9 @@ const SignUp = () => {
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
   const [username, setUsername] = useState("")
-  const { signUp, loginGoogle } = useAuth();
+  const { signUp, loginGoogle } = useAuth()
 
-  const notify = () => toast.warn("Passwords did not match");
+  const notify = () => toast.warn("Passwords did not match")
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-darkBlue1">
@@ -86,13 +86,11 @@ const SignUp = () => {
             />
           </div>
 
-          
-
           <div className="mt-6">
             <button
               onClick={(e) => {
                 if (password !== confirm) {
-                  notify();
+                  notify()
                 } else {
                   signUp(email, password)
                   navigate("/")

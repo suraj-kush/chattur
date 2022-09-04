@@ -8,7 +8,6 @@ import Peer from "simple-peer"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-
 import { useAuth } from "../middleware/Authentication"
 import { MeetGridCard, Loading } from "../components"
 
@@ -55,9 +54,9 @@ const Room = () => {
   const localVideo = useRef()
   // user
   const { user, loginGoogle } = useAuth()
-  
+
   //functions
-  const notify = () => toast.success("Link has been copied!");
+  const notify = () => toast.success("Link has been copied!")
 
   const sendMessage = (e) => {
     e.preventDefault()
@@ -284,10 +283,13 @@ const Room = () => {
                               />
                             </div>
                           )}
-                          <div className={`${
-                                !micOn &&  "bg-slate-800/70 backdrop-blur border-gray border-2  p-2 cursor-pointer rounded-xl text-white text-sm absolute bottom-4 right-4"
-                              }`}>
-                              {!micOn && <MicOffIcon size={15}/>}
+                          <div
+                            className={`${
+                              !micOn &&
+                              "bg-slate-800/70 backdrop-blur border-gray border-2  p-2 cursor-pointer rounded-xl text-white text-sm absolute bottom-4 right-4"
+                            }`}
+                          >
+                            {!micOn && <MicOffIcon size={15} />}
                           </div>
                           <div className="absolute bottom-4 right-4"></div>
                           <div className="absolute bottom-4 left-4">
@@ -547,11 +549,9 @@ const Room = () => {
                           className={`bg-slate-800/70 backdrop-blur border-gray
           border-2  p-2 cursor-pointer rounded-xl text-white text-xl hover:bg-green-400`}
                           onClick={() => {
-
-                            notify();
+                            notify()
                             navigator.clipboard.writeText(window.location.href)
-                          }
-                          }
+                          }}
                         >
                           <CopyToClipboardIcon
                             className="cursor-pointer"
@@ -559,16 +559,16 @@ const Room = () => {
                           />
                         </button>
                         <ToastContainer
-position="bottom-left"
-autoClose={1500}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover={false}
-/>
+                          position="bottom-left"
+                          autoClose={1500}
+                          hideProgressBar={false}
+                          newestOnTop={false}
+                          closeOnClick
+                          rtl={false}
+                          pauseOnFocusLoss
+                          draggable
+                          pauseOnHover={false}
+                        />
                       </motion.div>
                       <motion.div whileTap={{ scale: 0.9 }}>
                         <button
