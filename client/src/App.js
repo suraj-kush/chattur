@@ -10,14 +10,17 @@ import Home from "./pages/Home"
 import Room from "./pages/Room"
 import NotFound from "./pages/NotFound"
 
+import { useAuth } from "./middleware/Authentication"
+
 const App = () => {
+  const {user} = useAuth();
   return (
     <div className="flex">
       <div className="max-h-screen overflow-auto w-full">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/room/:roomID" element={<Room />} />
+          <Route path="/room/:roomID" element={user?<Room />:<SignIn />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
