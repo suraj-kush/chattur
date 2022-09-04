@@ -8,8 +8,6 @@ import { NewCallIcon, JoinCallIcon } from "../Icons"
 
 import { Link } from "react-router-dom"
 
-const roomId = uuid()
-
 const Home = () => {
   const months = [
     "January",
@@ -35,10 +33,14 @@ const Home = () => {
     "Saturday"
   ]
   const [date, setDate] = useState(new Date())
-
+  const [roomID, setRoomID] = useState(uuid())
   function refreshClock() {
     setDate(new Date())
   }
+  function roomIDGenerate() {
+    setRoomID(uuid())
+  }
+
   useEffect(() => {
     const timerId = setInterval(refreshClock, 1000)
     return function cleanup() {
@@ -81,7 +83,7 @@ const Home = () => {
       <div className="md:gap-2 flex-col md:flex-row">
         <div className="p-10">
           <div className="flex flex-row gap-2 md:gap-6 mb-3 md:mb-6 justify-center">
-            <Link to={`/room/${roomId}`} className="block">
+            <Link to={`/room/${roomID}`} className="block">
               <HomeCard
                 title="New Meeting"
                 desc="Create a new meeting"
@@ -89,6 +91,7 @@ const Home = () => {
                 iconBgColor="lightYellows"
                 bgColor="bg-yellow"
                 route={`/room/`}
+                onClick={roomIDGenerate}
               />
             </Link>
             <button onClick={showPrompt}>

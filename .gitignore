@@ -4,3 +4,4 @@ build
 .git
 *.env
 .DS_Store
+rough.txt
