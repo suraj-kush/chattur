@@ -13,7 +13,7 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
     const [username, setUsername] = useState("");
-    const [showhMessage, setMessage] = useState(false);
+    const [showMessage, setShowMessage] = useState(false);
     const {signUp, loginGoogle} = useAuth();
 
   return (
@@ -84,16 +84,16 @@ const SignUp = () => {
                         />
                     </div>
 
-                   { showhMessage ? <p id='mismatch' className='text-red text-sm' >*Passwords do not match</p> : null}
+                   { showMessage ? <p id='mismatch' className='text-red text-sm' >*Passwords do not match</p> : null}
                    
                     <div className="mt-6">
                         <button 
                         onClick={(e)=>{
                            if(password!==confirm){
-                            setMessage(true);
+                            setShowMessage(true);
                            }else{
                             signUp(email, password);
-                            setMessage(false);
+                            setShowMessage(false);
                             navigate("/");
                            }
                            e.preventDefault();
@@ -111,7 +111,10 @@ const SignUp = () => {
                         type="button"
                         onClick={()=>{
                             loginGoogle();
-                            navigate("/");
+                            setTimeout(()=>{
+                                navigate("/");
+                            }, 7500);
+                            
                         }}
                         className="flex focus:outline-none bg-blue items-center justify-center w-full p-2 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-violet-600"
                     >
