@@ -5,6 +5,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { io } from "socket.io-client"
 import Peer from "simple-peer"
 
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
+
 import { useAuth } from "../middleware/Authentication"
 import { MeetGridCard, Loading } from "../components"
 
@@ -49,11 +53,12 @@ const Room = () => {
   const socket = useRef()
   const peersRef = useRef([])
   const localVideo = useRef()
-
   // user
   const { user, loginGoogle } = useAuth()
-
+  
   //functions
+  const notify = () => toast.success("Link has been copied!");
+
   const sendMessage = (e) => {
     e.preventDefault()
     if (msgText) {
@@ -541,8 +546,11 @@ const Room = () => {
                         <button
                           className={`bg-slate-800/70 backdrop-blur border-gray
           border-2  p-2 cursor-pointer rounded-xl text-white text-xl hover:bg-green-400`}
-                          onClick={() =>
+                          onClick={() => {
+
+                            notify();
                             navigator.clipboard.writeText(window.location.href)
+                          }
                           }
                         >
                           <CopyToClipboardIcon
@@ -550,6 +558,17 @@ const Room = () => {
                             size={22}
                           />
                         </button>
+                        <ToastContainer
+position="bottom-left"
+autoClose={1500}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover={false}
+/>
                       </motion.div>
                       <motion.div whileTap={{ scale: 0.9 }}>
                         <button
