@@ -17,7 +17,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
-  const [username, setUsername] = useState("")
+  // const [username, setUsername] = useState("")
   const { signUp, user, loginGoogle } = useAuth()
 
   const notify = () => toast.warn("Passwords did not match")
@@ -104,7 +104,7 @@ const SignUp = () => {
                       navigate("/")
                     })
                     .catch((error) => {
-                      const errorCode = error.code
+                      // const errorCode = error.code
                       const errorMessage = error.message
                       console.log(errorMessage)
                       notify1()

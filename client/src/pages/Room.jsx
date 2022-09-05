@@ -24,7 +24,6 @@ import {
   SendIcon,
   CallEndIcon,
   ClearIcon,
-  CopyToClipboardIcon,
   ShareIcon,
   VideoOnIcon,
   VideoOffIcon,
@@ -53,7 +52,7 @@ const Room = () => {
   const peersRef = useRef([])
   const localVideo = useRef()
   // user
-  const { user, loginGoogle } = useAuth()
+  const { user } = useAuth()
 
   //functions
   const notify = () => toast.success("Link has been copied!")
