@@ -257,9 +257,9 @@ const Room = () => {
                             <button
                               className={`${
                                 pin
-                                  ? "bg-blue border-transparent"
-                                  : "bg-slate-800/70 backdrop-blur border-gray"
-                              } md:border-2 border-[1px] aspect-square md:p-2.5 p-1.5 cursor-pointer md:rounded-xl rounded-lg text-white md:text-xl text-lg`}
+                                  ? "bg-yellow border-transparent text-black"
+                                  : "bg-slate-800/70 backdrop-blur border-gray text-white"
+                              } md:border-2 border-[1px] aspect-square md:p-2.5 p-1.5 cursor-pointer md:rounded-xl rounded-lg md:text-xl text-lg`}
                               onClick={() => setPin(!pin)}
                             >
                               {pin ? <PinActiveIcon /> : <PinIcon />}
@@ -344,7 +344,7 @@ const Room = () => {
                             layout
                             className={`${
                               participantsOpen ? "block" : "hidden"
-                            } flex flex-col w-full mt-2 h-full max-h-[50vh] overflow-y-scroll gap-3 p-2 bg-blue-600`}
+                            } flex flex-col w-full mt-2 h-full max-h-[50vh] overflow-y-scroll gap-3 p-2 bg-yellow-600`}
                           >
                             <AnimatePresence>
                               <motion.div
@@ -468,8 +468,8 @@ const Room = () => {
                                 </button>
                               )}
                             </div>
-                            <div>
-                              <button className="bg-blue h-10 text-md aspect-square rounded-lg flex items-center justify-center">
+                            <div> 
+                              <button className="bg-yellow h-10 text-black text-md aspect-square rounded-lg flex items-center justify-center">
                                 <SendIcon />
                               </button>
                             </div>
@@ -546,7 +546,7 @@ const Room = () => {
                       <motion.div whileTap={{ scale: 0.9 }}>
                         <button
                           className={`bg-slate-800/70 backdrop-blur border-gray
-          border-2  p-2 cursor-pointer rounded-xl text-white text-xl hover:bg-green-400`}
+          border-2  p-2 cursor-pointer rounded-xl text-white text-xl hover:bg-green-400 hover:text-black`}
                           onClick={() => {
                             notify()
                             navigator.clipboard.writeText(window.location.href)
@@ -570,9 +570,9 @@ const Room = () => {
                         <button
                           className={`${
                             showChat
-                              ? "bg-blue border-transparent"
-                              : "bg-slate-800/70 backdrop-blur border-gray"
-                          } border-2  p-2 cursor-pointer rounded-xl text-white text-xl`}
+                              ? "bg-yellow border-transparent text-black"
+                              : "bg-slate-800/70 backdrop-blur text-white border-gray"
+                          } border-2  p-2 cursor-pointer rounded-xl text-xl`}
                           onClick={() => {
                             setshowChat(!showChat)
                           }}
