@@ -51,7 +51,7 @@ const Home = () => {
   function toggleModal() {
     setModal(false)
   }
-  function showPrompt(){
+  function showPrompt() {
     console.log("woeowprow")
     setModal(true)
   }
@@ -63,9 +63,7 @@ const Home = () => {
           <div>
             <p className="md:text-7xl text-4xl text-white">
               {`${
-                date.getHours() < 10
-                  ? `0${date.getHours()}`
-                  : date.getHours()
+                date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
               }:${
                 date.getMinutes() < 10
                   ? `0${date.getMinutes()}`
@@ -85,15 +83,15 @@ const Home = () => {
           <div className="flex flex-row gap-2 md:gap-6 mb-3 md:mb-6 justify-center">
             <Link to={`/room/${roomID}`} className="block">
               <button>
-              <HomeCard
-                title="New Meeting"
-                desc="Create a new meeting"
-                icon={<NewCallIcon />}
-                iconBgColor="lightYellows"
-                bgColor="bg-yellow"
-                route={`/room/`}
-                onClick={roomIDGenerate}
-              />
+                <HomeCard
+                  title="New Meeting"
+                  desc="Create a new meeting"
+                  icon={<NewCallIcon />}
+                  iconBgColor="lightYellows"
+                  bgColor="bg-yellow"
+                  route={`/room/`}
+                  onClick={roomIDGenerate}
+                />
               </button>
             </Link>
             <button onClick={showPrompt}>
@@ -104,7 +102,6 @@ const Home = () => {
                 bgColor="bg-blue"
                 // onClick={showPrompt}
               />
-
             </button>
             {modal ? <JoinMeetingPopCard closeModal={toggleModal} /> : null}
           </div>
