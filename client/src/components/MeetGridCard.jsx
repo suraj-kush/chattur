@@ -8,7 +8,6 @@ import { MicOnIcon, MicOffIcon, PinIcon, PinActiveIcon } from "../Icons"
 const MeetGridCard = ({ user, peer }) => {
   let currName = (user?.email).substring(0, user?.email.indexOf("@"))
   currName = currName.charAt(0).toUpperCase() + currName.slice(1)
-  console.log(currName)
   const [pin, setPin] = useState(false)
   const videoRef = useRef()
   const [videoActive, setVideoActive] = useState(true)
