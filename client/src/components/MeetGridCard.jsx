@@ -62,12 +62,6 @@ const MeetGridCard = ({ user, peer }) => {
           />
         </div>
       )}
-      <video
-        ref={videoRef}
-        autoPlay
-        controls={false}
-        className="h-full w-full object-cover rounded-lg scale-x-[-1]"
-      />
       <div className="absolute bottom-4 left-4">
         <div className="bg-slate-800/70 backdrop-blur   py-1 px-3 cursor-pointer rounded-md text-white text-xs">
           {user?.name || currName}
