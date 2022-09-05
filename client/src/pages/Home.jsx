@@ -91,16 +91,18 @@ const Home = () => {
                   bgColor="bg-yellow"
                   route={`/room/`}
                   onClick={roomIDGenerate}
+                  box={false}
                 />
               </button>
             </Link>
-            <button onClick={showPrompt}>
+            <button onClick={showPrompt} >
               <HomeCard
                 title="Join Meeting"
                 desc="via invitation link"
                 icon={<JoinCallIcon />}
-                bgColor="bg-blue"
-                // onClick={showPrompt}
+                bgColor="bg-darkBlue1"
+                box={true}
+                className="border border-3"
               />
             </button>
             {modal ? <JoinMeetingPopCard closeModal={toggleModal} /> : null}
